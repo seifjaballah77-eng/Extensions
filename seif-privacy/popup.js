@@ -1,1 +1,2 @@
 document.querySelectorAll('[data-url]').forEach(b=>b.onclick=()=>chrome.tabs.create({url:b.dataset.url}));
+const themeButton=document.querySelector('#theme');const storedTheme=localStorage.getItem('seif-theme');if(storedTheme==='light')document.body.classList.add('light');if(themeButton)themeButton.onclick=()=>{document.body.classList.toggle('light');localStorage.setItem('seif-theme',document.body.classList.contains('light')?'light':'dark')};
