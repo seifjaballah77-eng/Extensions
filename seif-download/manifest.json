@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "Seif Download",
+  "version": "1.0.0",
+  "description": "لوحة سريعة لإدارة التنزيلات.",
+  "permissions": [
+    "downloads"
+  ],
+  "action": {
+    "default_title": "Seif Download",
+    "default_popup": "popup.html"
+  }
+}
