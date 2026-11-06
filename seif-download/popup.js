@@ -1,0 +1,1 @@
+document.querySelector('#openDownloads').onclick=()=>chrome.tabs.create({url:'chrome://downloads'});document.querySelector('#recent').onclick=()=>chrome.downloads.search({limit:8,orderBy:['-startTime']},items=>{document.querySelector('#result').textContent=items.map(x=>(x.filename||x.url)+' — '+x.state).join('\n')||'لا توجد تنزيلات بعد.'});
