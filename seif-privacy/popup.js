@@ -1,0 +1,1 @@
+document.querySelectorAll('[data-url]').forEach(b=>b.onclick=()=>chrome.tabs.create({url:b.dataset.url}));
