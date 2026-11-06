@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "Seif Privacy",
+  "version": "1.0.0",
+  "description": "اختصارات وأدوات خصوصية للمتصفح.",
+  "permissions": [
+    "storage"
+  ],
+  "action": {
+    "default_title": "Seif Privacy",
+    "default_popup": "popup.html"
+  }
+}
