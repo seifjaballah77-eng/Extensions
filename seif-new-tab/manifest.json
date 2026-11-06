@@ -1,0 +1,12 @@
+{
+  "manifest_version": 3,
+  "name": "Seif New Tab",
+  "version": "1.0.0",
+  "description": "صفحة بداية بنفسجية قابلة للتخصيص.",
+  "chrome_url_overrides": {
+    "newtab": "newtab.html"
+  },
+  "permissions": [
+    "storage"
+  ]
+}
