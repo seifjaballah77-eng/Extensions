@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "Seif AI",
+  "version": "1.0.0",
+  "description": "مساعد متصفح بنفسجي: تلخيص محلي للنص المحدد والصفحة الحالية.",
+  "permissions": [
+    "activeTab",
+    "scripting"
+  ],
+  "action": {
+    "default_title": "Seif AI",
+    "default_popup": "popup.html"
+  }
+}
