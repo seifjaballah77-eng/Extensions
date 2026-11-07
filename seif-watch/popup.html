@@ -1,0 +1,11 @@
+<!doctype html>
+<html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Seif Watch</title><link rel="stylesheet" href="popup.css"></head>
+<body><header><div class="mark">SW</div><div><h1>Seif Watch</h1><p>مراقب المواقع الذكي</p></div></header>
+<form id="watchForm">
+<label>رابط الموقع<input id="url" type="url" placeholder="https://example.com" required></label>
+<label>اسم للمراقبة<input id="title" type="text" placeholder="مثلاً: سعر المنتج"></label>
+<label>كلمة تريد تتبعها (اختياري)<input id="keyword" type="text" placeholder="مثلاً: متوفر الآن"></label>
+<label>تكرار الفحص<select id="interval"><option value="5">كل 5 دقائق</option><option value="15">كل 15 دقيقة</option><option value="30">كل 30 دقيقة</option><option value="60">كل ساعة</option><option value="360">كل 6 ساعات</option><option value="1440">كل يوم</option></select></label>
+<button class="primary">＋ أضف للمراقبة</button></form>
+<div class="toolbar"><b>مواقع أراقبها</b><button id="check">فحص الآن</button></div><div id="items" class="items"><p class="empty">لم تضف مواقع بعد.</p></div>
+<p class="foot">تتم المراقبة محلياً عبر المتصفح. قد لا تعمل الصفحات التي تتطلب تسجيل دخول أو تمنع الوصول الآلي.</p><script src="popup.js"></script></body></html>
