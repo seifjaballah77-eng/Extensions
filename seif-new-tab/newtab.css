@@ -51,3 +51,41 @@
 body:not(.light) .dashboard h1,body:not(.light) .dashboard h2,body:not(.light) .dashboard p,body:not(.light) .dashboard small,body:not(.light) .dashboard b,body:not(.light) .dashboard label,body:not(.light) .dashboard footer{opacity:.93}
 .pomo-time{font-size:40px;text-align:center;font-weight:700;letter-spacing:3px;color:var(--adaptive-color);text-shadow:0 0 18px var(--adaptive-glow);padding:12px}
 .pomo-actions{display:flex;justify-content:center;gap:8px}
+
+/* Seif Hub in-tab sidebar layout */
+.topbar{padding-inline-start:clamp(12px,2vw,28px);padding-inline-end:clamp(12px,2vw,28px)}
+#sideToggle{display:none}
+.dashboard{width:auto;max-width:none;margin:0 300px 0 0;padding:8px clamp(16px,3vw,42px) 34px}
+.side-tools{position:fixed;z-index:4;top:78px;right:0;bottom:0;width:282px;margin:0;border-radius:18px 0 0 0;border-inline-start:1px solid #bd65ff77;border-inline-end:0;overflow:auto;background:rgba(12,9,18,.94);backdrop-filter:blur(16px);padding:14px}
+.side-heading{display:grid;gap:10px;color:var(--adaptive-color);margin-bottom:12px}
+.side-heading b{font-size:16px}
+.side-heading .mini-search{width:100%;max-width:none}
+.side-grid{display:grid;grid-template-columns:1fr;gap:7px}
+.side-grid .tool{min-height:56px;padding:8px 10px;grid-template-columns:34px 1fr;grid-template-rows:auto auto}
+.side-grid .tool-icon{width:31px;height:31px;font-size:17px;border-radius:9px}
+.side-grid .tool b{font-size:12px}
+.side-grid .tool small{font-size:10px}
+.side-hint{font-size:10px;color:#c9b7d4;text-align:center;border-top:1px solid #6e4a86;padding-top:10px;margin-top:12px}
+.tool-stage{min-height:145px;margin:15px 0 22px;padding:18px;border:1px solid #bd65ff66;border-radius:17px;background:rgba(12,10,18,.72);backdrop-filter:blur(12px)}
+.stage-welcome{text-align:center;padding:12px}
+.stage-welcome h2,.stage-message h2{color:var(--adaptive-color);margin:6px 0}
+.stage-welcome p,.stage-message p{color:#d6c9df;font-size:13px}
+.tool-stage.has-tool{display:block}
+.tool-stage .suite-card{max-width:900px;margin:0 auto;background:rgba(25,18,33,.9)}
+.stage-back{display:block;margin:0 0 12px auto;border:1px solid var(--line);border-radius:9px;padding:7px 11px;color:var(--fg);background:#21182b;cursor:pointer}
+.stage-message{max-width:760px;margin:10px auto;text-align:center;padding:20px}
+.stage-note{border:1px dashed var(--line);border-radius:11px;padding:12px}
+#hubSuite{display:none}
+.weather-pinned-slot{width:min(430px,90vw);margin:10px auto 0}
+.weather-inline{display:block!important;max-width:430px;margin:0 auto;padding:10px 14px;background:rgba(12,10,18,.78);border:1px solid #bd65ff77;border-radius:13px;backdrop-filter:blur(10px)}
+.weather-inline .card-title{margin-bottom:3px}
+.weather-inline .weather-info{padding:4px 0;font-size:12px}
+.hero{padding-bottom:12px}
+@media(max-width:900px){
+ #sideToggle{display:inline-block}
+ .side-tools{top:0;width:min(300px,86vw);transform:translateX(105%);transition:transform .25s;border-radius:0 18px 18px 0;right:auto;left:0;border-inline:1px solid #bd65ff77}
+ .side-tools.side-open{transform:translateX(0)}
+ .dashboard{margin:0;padding:8px 14px 30px}
+ .topbar{position:relative;z-index:6}
+}
+@media(max-width:560px){.tool-stage{padding:12px}.weather-pinned-slot{width:100%}.weather-inline{max-width:none}}
