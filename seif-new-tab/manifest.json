@@ -1,1 +1,1 @@
-{"manifest_version":3,"name":"Seif New Tab","version":"1.0.1","description":"صفحة بداية ذهبية وبنفسجي نيون مع بحث واختصارات.","chrome_url_overrides":{"newtab":"newtab.html"}}
+{"manifest_version":3,"name":"Seif Hub","version":"2.0.0","description":"مركز أدوات سيف وصفحة تبويب جديدة مع خلفيات فيديو وصور متحركة قابلة للتخصيص.","chrome_url_overrides":{"newtab":"newtab.html"}}
