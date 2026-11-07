@@ -162,7 +162,7 @@ $('#pomoStart').onclick=()=>{if(pomoInterval)return;$('#pomoStatus').textContent
 $('#pomoPause').onclick=()=>{clearInterval(pomoInterval);pomoInterval=null;$('#pomoStatus').textContent='تم إيقاف المؤقت مؤقتاً.'};
 $('#pomoReset').onclick=()=>{clearInterval(pomoInterval);pomoInterval=null;pomoRemaining=1500;renderPomo();$('#pomoStatus').textContent='25 دقيقة تركيز ثم استراحة.'};renderPomo();
 
-\n// Sidebar navigation: keep clock and weather on the home screen; open all other tools in-tab.
+// Sidebar navigation: keep clock and weather on the home screen; open all other tools in-tab.
 (function(){
  const stage=$('#toolStage'),grid=$('#toolGrid'),side=$('#toolsPanel');
  const cards=['aiCard','calendarCard','tasksCard','notesCard','musicCard','pomodoroCard'];
