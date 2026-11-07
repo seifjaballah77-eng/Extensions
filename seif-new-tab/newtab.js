@@ -166,18 +166,21 @@ $('#pomoReset').onclick=()=>{clearInterval(pomoInterval);pomoInterval=null;pomoR
 (function(){
  const stage=$('#toolStage'),grid=$('#toolGrid'),side=$('#toolsPanel');
  const cards=['aiCard','calendarCard','tasksCard','notesCard','musicCard','pomodoroCard'];
+ let activeCard=null;
  const weather=$('#weatherCard');
  if(weather){$('#weatherPinnedSlot').append(weather);weather.classList.add('weather-inline');}
- const titles={aiCard:'Seif AI',calendarCard:'التقويم',tasksCard:'المهام',notesCard:'ملاحظاتي',musicCard:'مشغل الموسيقى',pomodoroCard:'مؤقت التركيز'};
+ function restoreActive(){if(activeCard){$('#suiteGrid').append(activeCard);activeCard=null}}
+ function showHome(){stage.replaceChildren();stage.classList.remove('has-tool');const home=document.createElement('div');home.className='stage-welcome';home.innerHTML='<span class="tag">SEIF HUB WORKSPACE</span><h2>اختر أداة من القائمة الجانبية</h2><p>ستظهر الأداة هنا دون مغادرة تبويب Seif Hub.</p>';stage.append(home)}
  function showCard(id){
   const card=document.getElementById(id);if(!card)return;
-  stage.replaceChildren();card.hidden=false;stage.append(card);stage.classList.add('has-tool');
-  const close=document.createElement('button');close.className='stage-back';close.textContent='← العودة إلى الرئيسية';close.onclick=()=>{stage.replaceChildren();stage.classList.remove('has-tool');const home=document.createElement('div');home.className='stage-welcome';home.innerHTML='<span class="tag">SEIF HUB WORKSPACE</span><h2>اختر أداة من القائمة الجانبية</h2><p>ستظهر الأداة هنا دون مغادرة تبويب Seif Hub.</p>';stage.append(home);if(cards.includes(id))$('#suiteGrid').append(card)};stage.prepend(close);
+  restoreActive();stage.replaceChildren();card.hidden=false;stage.append(card);activeCard=card;stage.classList.add('has-tool');
+  const close=document.createElement('button');close.className='stage-back';close.textContent='← العودة إلى الرئيسية';close.onclick=()=>{restoreActive();showHome()};stage.prepend(close);
   if(id==='aiCard')$('#aiInput').focus();
   if(id==='tasksCard')$('#taskInput').focus();
  }
  function showMessage(title,desc,kind){
-  stage.replaceChildren();stage.classList.add('has-tool');
+  restoreActive();stage.replaceChildren();stage.classList.add('has-tool');
+  const back=document.createElement('button');back.className='stage-back';back.textContent='← العودة إلى الرئيسية';back.onclick=showHome;stage.append(back);
   const box=document.createElement('div');box.className='stage-message';
   const h=document.createElement('h2');h.textContent=title;
   const p=document.createElement('p');p.textContent=desc;
@@ -190,7 +193,7 @@ $('#pomoReset').onclick=()=>{clearInterval(pomoInterval);pomoInterval=null;pomoR
   e.preventDefault();
   if(a.dataset.openCard){showCard(a.dataset.openCard);return}
   if(a.hasAttribute('data-open-wallpapers')){$('#wallpaperOpen').click();return}
-  if(a.dataset.extension){showMessage(a.dataset.extension,'هذه الأداة مدرجة في مركزك، لكن واجهتها لم تُدمج داخل تبويب Seif Hub بعد.');return}
+  if(a.dataset.extension){showMessage(a.dataset.extension,'هذه الأداة مدرجة في مركزك، لكن واجهتها لم تُدمج داخل تبويب Seif Hub بعد.','extension');return}
   if(a.dataset.idea){showMessage(a.dataset.idea,'واجهة هذه الأداة ووظائفها ستُبنى داخل Seif Hub بدلاً من تحويلك إلى موقع خارجي.','idea');return}
  });
  const toggle=$('#sideToggle');
