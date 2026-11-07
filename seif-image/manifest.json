@@ -1,0 +1,1 @@
+{"manifest_version":3,"name":"Seif Image","version":"1.0.0","description":"اكتشاف الصور في الصفحة وتنزيلها.","permissions":["activeTab","scripting","downloads"],"action":{"default_title":"Seif Image","default_popup":"popup.html"}}
