@@ -1,0 +1,1 @@
+{"manifest_version":3,"name":"Seif Capture","version":"1.0.0","description":"التقاط صورة مرئية من علامة التبويب الحالية.","permissions":["activeTab","tabs","downloads"],"action":{"default_title":"Seif Capture","default_popup":"popup.html"}}
