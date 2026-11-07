@@ -10,6 +10,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Validate manifests, popup files, and JavaScript
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json, pathlib
+          folders = sorted(pathlib.Path('.').glob('*/manifest.json'))
+          if not folders:
+              raise SystemExit("No extension manifests found")
+          for manifest in folders:
+              data = json.loads(manifest.read_text(encoding='utf-8'))
+              folder = manifest.parent
+              popup = data.get('action', {}).get('default_popup')
+              override = data.get('chrome_url_overrides', {})
+              for rel in [popup, *override.values()]:
+                  if rel and not (folder / rel).is_file():
+                      raise SystemExit(f"Missing referenced page: {folder / rel}")
+              print("OK", manifest)
+          PY
+          find . -path './.git' -prune -o -name '*.js' -type f -print0 | xargs -0 -r -n1 node --check
       - name: Package each extension separately
         run: |
           mkdir -p dist
