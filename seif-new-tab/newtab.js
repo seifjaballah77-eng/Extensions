@@ -161,3 +161,39 @@ function renderPomo(){const m=Math.floor(pomoRemaining/60),s=pomoRemaining%60;$(
 $('#pomoStart').onclick=()=>{if(pomoInterval)return;$('#pomoStatus').textContent='جلسة التركيز تعمل الآن.';pomoInterval=setInterval(()=>{pomoRemaining--;renderPomo();if(pomoRemaining<=0){clearInterval(pomoInterval);pomoInterval=null;$('#pomoStatus').textContent='انتهت الجلسة! خذ استراحة قصيرة.';try{playUiTone('toggle')}catch(e){}if('Notification'in window&&Notification.permission==='granted')new Notification('Seif Hub',{body:'انتهت جلسة التركيز'})}},1000)};
 $('#pomoPause').onclick=()=>{clearInterval(pomoInterval);pomoInterval=null;$('#pomoStatus').textContent='تم إيقاف المؤقت مؤقتاً.'};
 $('#pomoReset').onclick=()=>{clearInterval(pomoInterval);pomoInterval=null;pomoRemaining=1500;renderPomo();$('#pomoStatus').textContent='25 دقيقة تركيز ثم استراحة.'};renderPomo();
+
+\n// Sidebar navigation: keep clock and weather on the home screen; open all other tools in-tab.
+(function(){
+ const stage=$('#toolStage'),grid=$('#toolGrid'),side=$('#toolsPanel');
+ const cards=['aiCard','calendarCard','tasksCard','notesCard','musicCard','pomodoroCard'];
+ const weather=$('#weatherCard');
+ if(weather){$('#weatherPinnedSlot').append(weather);weather.classList.add('weather-inline');}
+ const titles={aiCard:'Seif AI',calendarCard:'التقويم',tasksCard:'المهام',notesCard:'ملاحظاتي',musicCard:'مشغل الموسيقى',pomodoroCard:'مؤقت التركيز'};
+ function showCard(id){
+  const card=document.getElementById(id);if(!card)return;
+  stage.replaceChildren();card.hidden=false;stage.append(card);stage.classList.add('has-tool');
+  const close=document.createElement('button');close.className='stage-back';close.textContent='← العودة إلى الرئيسية';close.onclick=()=>{stage.replaceChildren();stage.classList.remove('has-tool');const home=document.createElement('div');home.className='stage-welcome';home.innerHTML='<span class="tag">SEIF HUB WORKSPACE</span><h2>اختر أداة من القائمة الجانبية</h2><p>ستظهر الأداة هنا دون مغادرة تبويب Seif Hub.</p>';stage.append(home);if(cards.includes(id))$('#suiteGrid').append(card)};stage.prepend(close);
+  if(id==='aiCard')$('#aiInput').focus();
+  if(id==='tasksCard')$('#taskInput').focus();
+ }
+ function showMessage(title,desc,kind){
+  stage.replaceChildren();stage.classList.add('has-tool');
+  const box=document.createElement('div');box.className='stage-message';
+  const h=document.createElement('h2');h.textContent=title;
+  const p=document.createElement('p');p.textContent=desc;
+  const note=document.createElement('p');note.className='stage-note';
+  note.textContent=kind==='extension'?'هذه إضافة متصفح مستقلة وتحتاج إلى تثبيت وصلاحيات المتصفح. لن نفتح ملفات المصدر أو ندّعي أنها تعمل داخل صفحة الويب قبل دمجها فعلياً.':'هذه فكرة جديدة أضفناها إلى قائمة Seif Hub. لم نعرضها كأداة مكتملة قبل تنفيذ وظائفها واختبارها.';
+  box.append(h,p,note);stage.append(box);
+ }
+ grid.addEventListener('click',e=>{
+  const a=e.target.closest('a.tool');if(!a)return;
+  e.preventDefault();
+  if(a.dataset.openCard){showCard(a.dataset.openCard);return}
+  if(a.hasAttribute('data-open-wallpapers')){$('#wallpaperOpen').click();return}
+  if(a.dataset.extension){showMessage(a.dataset.extension,'هذه الأداة مدرجة في مركزك، لكن واجهتها لم تُدمج داخل تبويب Seif Hub بعد.');return}
+  if(a.dataset.idea){showMessage(a.dataset.idea,'واجهة هذه الأداة ووظائفها ستُبنى داخل Seif Hub بدلاً من تحويلك إلى موقع خارجي.','idea');return}
+ });
+ const toggle=$('#sideToggle');
+ if(toggle)toggle.addEventListener('click',()=>side.classList.toggle('side-open'));
+ document.addEventListener('click',e=>{if(window.innerWidth<900&&side.classList.contains('side-open')&&!side.contains(e.target)&&e.target!==toggle)side.classList.remove('side-open')});
+})();
