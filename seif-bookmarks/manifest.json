@@ -1,0 +1,1 @@
+{"manifest_version":3,"name":"Seif Bookmarks","version":"1.0.0","description":"حفظ الروابط وتنظيمها والبحث فيها وتصدير نسخة احتياطية.","permissions":["storage","tabs"],"action":{"default_title":"Seif Bookmarks","default_popup":"popup.html"}}
