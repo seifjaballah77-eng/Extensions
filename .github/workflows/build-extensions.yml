@@ -34,7 +34,7 @@ jobs:
           mkdir -p dist
           for folder in seif-ai seif-privacy seif-download seif-new-tab seif-translate seif-capture seif-image seif-weather seif-calculator seif-bookmarks; do
             if [ -f "$folder/manifest.json" ]; then
-              zip -qr "dist/$folder.zip" "$folder"
+              archive="$folder"; [ "$folder" = "seif-new-tab" ] && archive="seif-hub"; zip -qr "dist/$archive.zip" "$folder"
             fi
           done
       - name: Publish separate ZIP downloads
