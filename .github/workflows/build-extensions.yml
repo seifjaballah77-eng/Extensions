@@ -1,0 +1,27 @@
+name: Build individual Seif extension ZIPs
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Package each extension separately
+        run: |
+          mkdir -p dist
+          for folder in seif-ai seif-privacy seif-download seif-new-tab seif-translate seif-capture seif-image seif-weather seif-calculator seif-bookmarks; do
+            if [ -f "$folder/manifest.json" ]; then
+              zip -qr "dist/$folder.zip" "$folder"
+            fi
+          done
+      - name: Publish separate ZIP downloads
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: seif-extensions-build-${{ github.run_number }}
+          name: Seif Extensions build ${{ github.run_number }}
+          make_latest: true
+          files: dist/*.zip
