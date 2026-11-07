@@ -89,3 +89,14 @@ $('#suiteToggle').onclick=()=>{const grid=$('#suiteGrid');grid.hidden=!grid.hidd
 let pointerX=0,pointerY=0;document.addEventListener('pointermove',e=>{pointerX=(e.clientX/innerWidth-.5)*2;pointerY=(e.clientY/innerHeight-.5)*2;body.style.setProperty('--pointer-x',pointerX.toFixed(2));body.style.setProperty('--pointer-y',pointerY.toFixed(2))},{passive:true});
 const oldAnalyzeFrame=analyzeFrame;
 analyzeFrame=function(){oldAnalyzeFrame();if(video.readyState>=2){try{const c=document.createElement('canvas');c.width=12;c.height=8;const x=c.getContext('2d',{willReadFrequently:true});x.drawImage(video,0,0,12,8);const a=x.getImageData(0,0,12,8).data;let lum=0,n=0;for(let i=0;i<a.length;i+=16){const l=.2126*a[i]+.7152*a[i+1]+.0722*a[i+2];if(l>28){lum+=l;n++}}if(n)body.style.setProperty('--video-energy',String(Math.min(1,lum/n/190)))}catch(e){}}};
+
+// Optional lightweight UI sound effects (Web Audio, generated locally).
+let soundEnabled=localStorage.getItem('seif-hub-sounds')!=='off',audioContext=null;
+function playUiTone(kind){if(!soundEnabled)return;try{const Ctx=window.AudioContext||window.webkitAudioContext;if(!Ctx)return;audioContext=audioContext||new Ctx();if(audioContext.state==='suspended')audioContext.resume();const osc=audioContext.createOscillator(),gain=audioContext.createGain();const now=audioContext.currentTime;osc.type='sine';osc.frequency.setValueAtTime(kind==='link'?660:kind==='toggle'?520:790,now);osc.frequency.exponentialRampToValueAtTime(kind==='toggle'?390:kind==='link'?520:560,now+.065);gain.gain.setValueAtTime(.0001,now);gain.gain.exponentialRampToValueAtTime(.035,now+.008);gain.gain.exponentialRampToValueAtTime(.0001,now+.085);osc.connect(gain);gain.connect(audioContext.destination);osc.start(now);osc.stop(now+.09)}catch(e){}}
+function updateSoundButton(){const b=$('#soundToggle');if(!b)return;b.textContent='الصوت: '+(soundEnabled?'تشغيل':'إيقاف');b.setAttribute('aria-pressed',String(soundEnabled))}
+$('#soundToggle').onclick=()=>{soundEnabled=!soundEnabled;localStorage.setItem('seif-hub-sounds',soundEnabled?'on':'off');updateSoundButton();if(soundEnabled)playUiTone('toggle')};
+document.addEventListener('click',e=>{const target=e.target.closest('button,a,.tool');if(!target||target.id==='soundToggle')return;playUiTone(target.tagName==='A'?'link':'button')});
+updateSoundButton();
+// If the last wallpaper is removed, clear the previous image as well.
+const originalShowItem=showItem;
+showItem=function(index){if(!items.length){$('.wallpaper').style.backgroundImage='none';body.style.removeProperty('--video-energy');body.style.removeProperty('--adaptive-color');body.style.removeProperty('--adaptive-glow')}originalShowItem(index)};
