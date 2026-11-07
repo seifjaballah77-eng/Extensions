@@ -24,3 +24,25 @@
 /* Subtle live response to video movement and pointer position */
 .wallpaper video{transform:translate(calc(var(--pointer-x,0)*-5px),calc(var(--pointer-y,0)*-5px)) scale(calc(1.015 + var(--video-energy,0)*.018));transition:transform .7s ease-out;will-change:transform}
 .wallpaper{background-position:calc(50% + var(--pointer-x,0)*4px) calc(50% + var(--pointer-y,0)*4px);transition:background-position .6s ease-out}
+
+/* Adjustable translucency: let wallpaper remain visible behind all content. */
+:root{--ui-alpha:.72}
+.topbar,.tools,.hub-suite,.suite-card,.tool,.quick-links a,.top-actions button,.hero form input,.hero form select,.tiny-button,.color-status,.wall-dialog{backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px)}
+.tools{background:rgba(14,10,21,var(--ui-alpha))}.hub-suite{background:rgba(12,10,18,calc(var(--ui-alpha)*.82))}
+.suite-card{background:rgba(26,20,34,calc(var(--ui-alpha)*.9))}
+.tool{background:rgba(33,24,43,calc(var(--ui-alpha)*.92))}
+.top-actions button,.tiny-button,.quick-links a{background:rgba(23,17,31,calc(var(--ui-alpha)*.94))}
+.hero h1,.hero .subtitle,.date-line{background:rgba(5,4,10,calc(var(--ui-alpha)*.52))}
+.tag,.clock,.hero h1,.hero .subtitle,.date-line,.tool b,.tool small,.suite-card,.suite-card b,.quick-links a,footer,.hint{ text-shadow:0 1px 3px rgba(0,0,0,.78),0 0 8px rgba(0,0,0,.22)}
+.transparency-control{display:flex;align-items:center;gap:6px;color:#fff;font-size:11px;text-shadow:0 2px 7px #000}
+.transparency-control input{width:85px;accent-color:var(--adaptive-color)}
+.ai-shortcuts{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.ai-shortcuts button{border:1px solid var(--line);border-radius:16px;padding:5px 9px;background:rgba(30,22,40,.62);color:var(--fg);font-size:11px;cursor:pointer}
+.ai-source{display:inline-block;color:var(--adaptive-color);font-size:11px;text-decoration:underline}
+.pomo-time{font-size:40px;text-align:center;font-weight:700;letter-spacing:3px;color:var(--adaptive-color);text-shadow:0 0 18px var(--adaptive-glow);padding:12px}
+.pomo-actions{display:flex;justify-content:center;gap:8px}
+.mode-cyber .suite-card{background:rgba(7,24,39,calc(var(--ui-alpha)*.92))}
+.mode-luxury .suite-card{background:rgba(21,18,12,calc(var(--ui-alpha)*.92))}
+.light .suite-card{background:rgba(255,255,255,calc(var(--ui-alpha)*.9));color:#281b32}
+.light .ai-bubble{background:rgba(90,60,110,.14);color:#281b32}
+@media(max-width:650px){.transparency-control{width:100%;justify-content:center}}
