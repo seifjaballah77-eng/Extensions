@@ -1,1 +1,45 @@
-<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Seif New Tab</title><link rel="stylesheet" href="newtab.css"></head><body><button id="theme">تبديل الوضع</button><main><div class="orb"></div><p class="tag">SEIF EXTENSIONS</p><h1>مرحباً بك 👋</h1><p>مساحة تصفحك، بطريقتك.</p><form id="search"><input id="q" placeholder="ابحث في Google أو اكتب عنوان موقع"><button>بحث</button></form><nav><a href="https://mail.google.com">Gmail</a><a href="https://youtube.com">YouTube</a><a href="https://github.com">GitHub</a><a href="chrome://downloads">التنزيلات</a></nav><small>صنع بيد سيف · Seif Extensions</small></main><script src="newtab.js"></script></body></html>
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#09070e"><title>Seif Hub</title><link rel="stylesheet" href="newtab.css">
+</head>
+<body>
+<div class="wallpaper" aria-hidden="true"><video id="wallVideo" muted playsinline loop></video><div class="shade" id="shade"></div></div>
+<header class="topbar"><a class="brand" href="#">✦ SEIF HUB</a><div class="top-actions"><button id="wallpaperOpen" class="soft">استوديو الخلفيات</button><button id="theme">الوضع النهاري</button></div></header>
+<main class="dashboard">
+<section class="hero"><p class="tag">YOUR PERSONAL BROWSER SPACE</p><div id="clock" class="clock">--:--</div><h1>مرحباً بك في Seif Hub</h1><p class="subtitle">كل أدواتك ومساحتك الشخصية في تبويب واحد.</p>
+<form id="search"><input id="q" autocomplete="off" placeholder="ابحث في الويب أو اكتب عنوان موقع"><button>بحث</button></form>
+</section>
+<section class="tools"><div class="section-title"><h2>أدواتك</h2><input id="toolSearch" class="mini-search" placeholder="ابحث عن أداة"></div>
+<div class="tool-grid" id="toolGrid">
+<a class="tool" data-name="الترجمة Seif Translate" href="https://github.com/seifjaballah77-eng/Extensions/tree/main/seif-translate"><span class="tool-icon">文</span><b>Seif Translate</b><small>ترجمة GPT داخل الصفحة</small></a>
+<a class="tool" data-name="التقاط الشاشة Seif Capture" href="https://github.com/seifjaballah77-eng/Extensions/tree/main/seif-capture"><span class="tool-icon">▣</span><b>Seif Capture</b><small>لقطات الشاشة</small></a>
+<a class="tool" data-name="الصور Seif Image" href="https://github.com/seifjaballah77-eng/Extensions/tree/main/seif-image"><span class="tool-icon">▧</span><b>Seif Image</b><small>اكتشاف وتنزيل الصور</small></a>
+<a class="tool" data-name="الطقس Seif Weather" href="https://github.com/seifjaballah77-eng/Extensions/tree/main/seif-weather"><span class="tool-icon">☼</span><b>Seif Weather</b><small>الطقس والتوقعات</small></a>
+<a class="tool" data-name="الحاسبة Seif Calculator" href="https://github.com/seifjaballah77-eng/Extensions/tree/main/seif-calculator"><span class="tool-icon">＋</span><b>Seif Calculator</b><small>الحساب والخصومات</small></a>
+<a class="tool" data-name="المفضلة Seif Bookmarks" href="https://github.com/seifjaballah77-eng/Extensions/tree/main/seif-bookmarks"><span class="tool-icon">☆</span><b>Seif Bookmarks</b><small>حفظ الروابط وتنظيمها</small></a>
+<a class="tool" data-name="الذكاء الاصطناعي Seif AI" href="https://github.com/seifjaballah77-eng/Extensions/tree/main/seif-ai"><span class="tool-icon">✧</span><b>Seif AI</b><small>مساعد الصفحة</small></a>
+<a class="tool" data-name="الخصوصية Seif Privacy" href="https://github.com/seifjaballah77-eng/Extensions/tree/main/seif-privacy"><span class="tool-icon">⬡</span><b>Seif Privacy</b><small>أدوات الخصوصية</small></a>
+<a class="tool" data-name="التنزيلات Seif Download" href="https://github.com/seifjaballah77-eng/Extensions/tree/main/seif-download"><span class="tool-icon">⇩</span><b>Seif Download</b><small>مدير التنزيلات</small></a>
+</div><p class="hint">الأدوات التي لم تُدمج وظائفها بعد تفتح ملفاتها ومعلوماتها في المستودع؛ سننقل وظائفها إلى Seif Hub على مراحل.</p>
+</section>
+<section class="quick-links"><a href="https://youtube.com">YouTube</a><a href="https://mail.google.com">Gmail</a><a href="https://github.com">GitHub</a><a href="chrome://downloads">التنزيلات</a></section>
+<footer>صنع بيد سيف · Seif Hub</footer>
+</main>
+<dialog id="wallDialog" class="wall-dialog"><div class="dialog-head"><div><p class="tag">PERSONALIZE YOUR SPACE</p><h2>استوديو الخلفيات</h2></div><button id="wallClose" class="close">✕</button></div>
+<p class="dialog-intro">أضف فيديوهاتك أو صورك، عاينها واضبط مظهرها، ثم أنشئ قائمة تتبدل تلقائياً.</p>
+<div class="preview-wrap"><video id="previewVideo" muted playsinline loop></video><img id="previewImage" alt="معاينة الخلفية"><div class="preview-shade" id="previewShade"></div><span id="previewLabel">معاينة الخلفية</span></div>
+<div class="wall-controls">
+<label class="file-button">＋ إضافة فيديوهات أو صور<input id="wallFiles" type="file" accept="video/*,image/*" multiple></label>
+<label>تبديل الخلفية كل<select id="interval"><option value="1">دقيقة</option><option value="3" selected>3 دقائق</option><option value="5">5 دقائق</option><option value="10">10 دقائق</option><option value="15">15 دقيقة</option><option value="30">30 دقيقة</option><option value="60">ساعة</option></select></label>
+<label>طريقة العرض<select id="fit"><option value="cover">ملء الشاشة</option><option value="contain">إظهار الصورة كاملة</option></select></label>
+<label>تعتيم الخلفية <input id="darkness" type="range" min="0" max="85" value="28"></label>
+<label>تمويه الخلفية <input id="blur" type="range" min="0" max="12" value="0"></label>
+</div>
+<div class="wall-list-head"><b>قائمة خلفياتي</b><div><button id="shuffle">ترتيب عشوائي</button><button id="rotateNow">تبديل الآن</button></div></div>
+<div id="wallList" class="wall-list"><p class="empty">لم تضف خلفيات بعد. اختر فيديوهات أو صوراً من جهازك.</p></div>
+<div class="dialog-foot"><span id="wallStatus">الخلفيات محفوظة على هذا الجهاز فقط.</span><button id="wallSave" class="primary">حفظ وتطبيق</button></div>
+</dialog>
+<script src="newtab.js"></script>
+</body></html>
