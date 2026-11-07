@@ -1,0 +1,10 @@
+{
+  "manifest_version": 3,
+  "name": "Seif Watch",
+  "version": "1.0.0",
+  "description": "راقب تغيّر صفحات المواقع واحصل على تنبيه عند التغيير.",
+  "permissions": ["storage", "alarms", "notifications"],
+  "host_permissions": ["<all_urls>"],
+  "action": { "default_title": "Seif Watch", "default_popup": "popup.html" },
+  "background": { "service_worker": "background.js" }
+}
