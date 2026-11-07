@@ -100,3 +100,64 @@ updateSoundButton();
 // If the last wallpaper is removed, clear the previous image as well.
 const originalShowItem=showItem;
 showItem=function(index){if(!items.length){$('.wallpaper').style.backgroundImage='none';body.style.removeProperty('--video-energy');body.style.removeProperty('--adaptive-color');body.style.removeProperty('--adaptive-glow')}originalShowItem(index)};
+
+
+// Seif AI v2: arithmetic, date/time, task actions and live encyclopedia lookup.
+function safeCalculate(raw){
+ const s=raw.replace(/,/g,'.').replace(/×/g,'*').replace(/÷/g,'/').replace(/٪/g,'%').replace(/\s+/g,'');
+ if(!/^[0-9.+*/()%\-]+$/.test(s)||!/[0-9]/.test(s))return null;
+ let i=0;
+ function expr(){let v=term();while(s[i]==='+'||s[i]==='-'){const op=s[i++],r=term();v=op==='+'?v+r:v-r}return v}
+ function term(){let v=factor();while(s[i]==='*'||s[i]==='/'){const op=s[i++],r=factor();if(op==='/'&&r===0)throw Error('zero');v=op==='*'?v*r:v/r}return v}
+ function factor(){if(s[i]==='+'){i++;return factor()}if(s[i]==='-'){i++;return -factor()}if(s[i]==='('){i++;const v=expr();if(s[i++]!==')')throw Error('paren');return v}const start=i;while(/[0-9.]/.test(s[i]||'')&&i<s.length)i++;if(start===i)throw Error('number');const v=Number(s.slice(start,i));if(!Number.isFinite(v))throw Error('nan');return v}
+ try{const result=expr();if(i!==s.length||!Number.isFinite(result))return null;return Number(result.toFixed(8))}catch(e){return null}
+}
+async function wikiAnswer(query){
+ const cleaned=query.replace(/^(من هو|من هي|ما هو|ما هي|اشرح|عرّف|عرف|ابحث عن|معلومات عن|who is|what is|tell me about)\s*/i,'').trim();
+ if(!cleaned)return null;
+ try{
+  const endpoint='https://ar.wikipedia.org/w/api.php?action=opensearch&search='+encodeURIComponent(cleaned)+'&limit=1&namespace=0&format=json&origin=*';
+  const r=await fetch(endpoint);if(!r.ok)return null;const data=await r.json();const title=data[1]?.[0];if(!title)return null;
+  const page=await fetch('https://ar.wikipedia.org/api/rest_v1/page/summary/'+encodeURIComponent(title));
+  if(!page.ok)return null;const info=await page.json();if(!info.extract)return null;
+  return {text:info.extract,url:info.content_urls?.desktop?.page||('https://ar.wikipedia.org/wiki/'+encodeURIComponent(title)),title};
+ }catch(e){return null}
+}
+function aiSay(text,kind='ai'){const p=document.createElement('p');p.className=kind==='user'?'user-bubble':'ai-bubble';p.textContent=text;$('#aiMessages').append(p);$('#aiMessages').scrollTop=$('#aiMessages').scrollHeight}
+async function answerSeifAI(question){
+ const q=question.trim();if(!q)return;const low=q.toLowerCase();
+ const calcText=q.replace(/^(احسب|كم يساوي|ما ناتج)\s*/i,'').replace(/(يساوي|؟|\?)$/,'').trim();
+ const calculation=safeCalculate(calcText);
+ if(calculation!==null&&/[0-9]/.test(calcText)){aiSay('الناتج: '+calculation);return}
+ if(/الساعة|الوقت الآن|كم الوقت|التاريخ اليوم|ما تاريخ اليوم/.test(q)){const d=new Date();aiSay('الوقت الآن '+d.toLocaleTimeString('ar-TN',{hour:'2-digit',minute:'2-digit'})+'، والتاريخ '+d.toLocaleDateString('ar-TN',{weekday:'long',year:'numeric',month:'long',day:'numeric'})+'.');return}
+ if(/أضف مهمة|اضافة مهمة|أضف إلى المهام|ذكّرني بمهمة/.test(q)){const task=q.replace(/.*?(أضف مهمة|اضافة مهمة|أضف إلى المهام|ذكّرني بمهمة)\s*/,'').trim();if(task){tasks.push({text:task,done:false});persistTasks();renderTasks();aiSay('أضفت المهمة إلى قائمتك: '+task);return}}
+ if(/اعرض مهامي|قائمة المهام|ما مهامي/.test(q)){aiSay(tasks.length?'مهامك: '+tasks.map((t,i)=>(i+1)+'. '+(t.done?'✓ ':'')+t.text).join('، '):'قائمة المهام فارغة حالياً.');return}
+ if(/طقس|الجو اليوم/.test(q)){aiSay('افتح بطاقة الطقس واضغط «تحديث» لمنح إذن الموقع. ستظهر درجة الحرارة والرطوبة والرياح هناك.');$('#weatherCard').scrollIntoView({behavior:'smooth',block:'center'});return}
+ if(/ملاحظة|احفظ هذا/.test(q)){const note=q.replace(/^(احفظ هذا|أضف ملاحظة|ملاحظة)\s*/,'').trim();if(note){$('#notesInput').value=($('#notesInput').value?$('#notesInput').value+'\n':'')+note;localStorage.setItem('seif-hub-notes',$('#notesInput').value);aiSay('حفظت الملاحظة في دفتر ملاحظاتك.');return}}
+ const known=[
+  [/من أنت|اسمك|من تكون|who are you/i,'أنا Seif AI داخل Seif Hub. أساعدك في الحساب، تنظيم المهام، الملاحظات، الوقت، والبحث عن معلومات عامة.'],
+  [/ماذا تستطيع|ماذا يمكنك|قدراتك|help|مساعدة/i,'أستطيع إجراء العمليات الحسابية، إخبارك بالوقت والتاريخ، إضافة المهام وعرضها، حفظ الملاحظات، توجيهك إلى الطقس، والبحث عن معلومات موسوعية. جرّب أزرار الاقتراحات.'],
+  [/نظم يومي|نظّم يومي|خطط لي|تنظيم يوم/i,'خطة مقترحة: 1) اكتب أهم 3 مهام. 2) ابدأ بالأصعب لمدة 25 دقيقة. 3) خذ استراحة 5 دقائق. 4) راجع ما أنجزته ثم حدّث قائمتك.'],
+  [/فكرة|اقترح.*مشروع|ماذا أفعل/i,'فكرة: أنشئ لوحة يومية تجمع الطقس والمهام والتقويم، ثم خصص خلفية لكل حالة عمل. يمكنك أيضاً جعل Seif Hub يفتح تلقائياً على وضع التركيز.'],
+  [/ترجم.*hello|معنى hello/i,'Hello تعني «مرحباً» أو «أهلاً» بالعربية.'],
+  [/ما هو الذكاء الاصطناعي|اشرح الذكاء الاصطناعي/i,'الذكاء الاصطناعي هو مجال يصمم أنظمة تنفذ مهاماً تتطلب عادةً قدرات بشرية مثل فهم اللغة والتعرف على الأنماط والتنبؤ. بعض الأنظمة تعتمد قواعد ثابتة، وأخرى نماذج تعلم آلي كبيرة.']
+ ];
+ const match=known.find(x=>x[0].test(q));if(match){aiSay(match[1]);return}
+ aiSay('أبحث عن معلومة موثوقة حول: '+q+' ...');
+ const result=await wikiAnswer(q);
+ const messages=$('#aiMessages');const last=messages.lastElementChild;if(last&&last.textContent.startsWith('أبحث عن معلومة'))last.remove();
+ if(result){aiSay(result.title+': '+result.text);const a=document.createElement('a');a.href=result.url;a.target='_blank';a.rel='noopener';a.textContent='المصدر: ويكيبيديا';a.className='ai-source';messages.append(a)}
+ else {aiSay('لم أجد نتيجة موسوعية مناسبة لهذا السؤال. جرّب صياغة أقصر أو استخدم زر البحث العام. لا أريد اختراع إجابة غير مؤكدة.');const a=document.createElement('a');a.href='https://www.google.com/search?q='+encodeURIComponent(q);a.target='_blank';a.rel='noopener';a.textContent='ابحث في Google';a.className='ai-source';messages.append(a)}
+}
+$('#aiForm').onsubmit=e=>{e.preventDefault();const q=$('#aiInput').value.trim();if(!q)return;aiSay(q,'user');$('#aiInput').value='';answerSeifAI(q)};
+document.querySelectorAll('.ai-shortcuts button').forEach(b=>b.onclick=()=>{const q=b.dataset.prompt;aiSay(q,'user');answerSeifAI(q)});
+
+// User-adjustable translucency across the complete interface.
+function setUiTransparency(value){const n=Math.max(15,Math.min(95,Number(value)||72));body.style.setProperty('--ui-alpha',String(n/100));localStorage.setItem('seif-hub-transparency',String(n))}
+const transparency=$('#uiTransparency');if(transparency){transparency.value=localStorage.getItem('seif-hub-transparency')||'72';setUiTransparency(transparency.value);transparency.oninput=()=>setUiTransparency(transparency.value)}
+// Pomodoro focus timer.
+let pomoRemaining=1500,pomoInterval=null;
+function renderPomo(){const m=Math.floor(pomoRemaining/60),s=pomoRemaining%60;$('#pomoTime').textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0')}
+$('#pomoStart').onclick=()=>{if(pomoInterval)return;$('#pomoStatus').textContent='جلسة التركيز تعمل الآن.';pomoInterval=setInterval(()=>{pomoRemaining--;renderPomo();if(pomoRemaining<=0){clearInterval(pomoInterval);pomoInterval=null;$('#pomoStatus').textContent='انتهت الجلسة! خذ استراحة قصيرة.';try{playUiTone('toggle')}catch(e){}if('Notification'in window&&Notification.permission==='granted')new Notification('Seif Hub',{body:'انتهت جلسة التركيز'})}},1000)};
+$('#pomoPause').onclick=()=>{clearInterval(pomoInterval);pomoInterval=null;$('#pomoStatus').textContent='تم إيقاف المؤقت مؤقتاً.'};
+$('#pomoReset').onclick=()=>{clearInterval(pomoInterval);pomoInterval=null;pomoRemaining=1500;renderPomo();$('#pomoStatus').textContent='25 دقيقة تركيز ثم استراحة.'};renderPomo();
