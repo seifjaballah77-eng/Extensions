@@ -4,14 +4,15 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#09070e"><title>Seif Hub</title><link rel="stylesheet" href="newtab.css">
 </head>
-<body>
+<body class="mode-hacker">
 <div class="wallpaper" aria-hidden="true"><video id="wallVideo" muted playsinline loop></video><div class="shade" id="shade"></div></div>
-<header class="topbar"><a class="brand" href="#">✦ SEIF HUB</a><div class="top-actions"><button id="wallpaperOpen" class="soft">استوديو الخلفيات</button><button id="theme">الوضع النهاري</button></div></header>
+<header class="topbar"><a class="brand" href="#">✦ SEIF HUB</a><div class="top-actions"><button id="modeHacker" class="mode-button active">⌁ Hacker</button><button id="modeCalm" class="mode-button">◌ هدوء</button><button id="wallpaperOpen" class="soft">استوديو الخلفيات</button><button id="theme">الوضع النهاري</button></div></header>
 <main class="dashboard">
-<section class="hero"><p class="tag">YOUR PERSONAL BROWSER SPACE</p><div id="clock" class="clock">--:--</div><h1>مرحباً بك في Seif Hub</h1><p class="subtitle">كل أدواتك ومساحتك الشخصية في تبويب واحد.</p>
-<form id="search"><input id="q" autocomplete="off" placeholder="ابحث في الويب أو اكتب عنوان موقع"><button>بحث</button></form>
+<section class="hero"><p class="tag">YOUR PERSONAL BROWSER SPACE</p><div id="clock" class="clock">--:--</div><div id="dateLine" class="date-line"></div><h1 class="adaptive-text">مرحباً بك في Seif Hub</h1><p class="subtitle adaptive-text">مساحتك الذكية للعمل والتركيز والاستكشاف.</p>
+<form id="search"><input id="q" autocomplete="off" placeholder="ابحث في الويب أو اكتب عنوان موقع"><select id="searchEngine" aria-label="محرك البحث"><option value="google">Google</option><option value="bing">Bing</option><option value="duck">DuckDuckGo</option><option value="youtube">YouTube</option></select><button>بحث</button></form>
+<div class="personal-controls"><label class="toggle-line"><input id="autoColor" type="checkbox" checked><span>ألوان كتابة تتكيف مع الفيديو</span></label><span id="colorStatus" class="color-status">تحليل الألوان تلقائي</span><button id="focusToggle" class="tiny-button">وضع التركيز</button></div>
 </section>
-<section class="tools"><div class="section-title"><h2>أدواتك</h2><input id="toolSearch" class="mini-search" placeholder="ابحث عن أداة"></div>
+<section class="tools" id="toolsPanel"><div class="section-title"><h2>أدواتك</h2><input id="toolSearch" class="mini-search" placeholder="ابحث عن أداة"></div>
 <div class="tool-grid" id="toolGrid">
 <a class="tool" data-name="مراقبة المواقع Seif Watch" href="https://github.com/seifjaballah77-eng/Extensions/tree/main/seif-watch"><span class="tool-icon">◉</span><b>Seif Watch</b><small>مراقبة تغيّرات المواقع</small></a>
 <a class="tool" data-name="الترجمة Seif Translate" href="https://github.com/seifjaballah77-eng/Extensions/tree/main/seif-translate"><span class="tool-icon">文</span><b>Seif Translate</b><small>ترجمة GPT داخل الصفحة</small></a>
@@ -25,7 +26,7 @@
 <a class="tool" data-name="التنزيلات Seif Download" href="https://github.com/seifjaballah77-eng/Extensions/tree/main/seif-download"><span class="tool-icon">⇩</span><b>Seif Download</b><small>مدير التنزيلات</small></a>
 </div><p class="hint">الأدوات التي لم تُدمج وظائفها بعد تفتح ملفاتها ومعلوماتها في المستودع؛ سننقل وظائفها إلى Seif Hub على مراحل.</p>
 </section>
-<section class="quick-links"><a href="https://youtube.com">YouTube</a><a href="https://mail.google.com">Gmail</a><a href="https://github.com">GitHub</a><a href="chrome://downloads">التنزيلات</a></section>
+<section class="quick-links"><a href="https://youtube.com">YouTube</a><a href="https://mail.google.com">Gmail</a><a href="https://github.com">GitHub</a><a href="chrome://downloads">التنزيلات</a><a href="https://web.whatsapp.com">WhatsApp Web</a></section>
 <footer>صنع بيد سيف · Seif Hub</footer>
 </main>
 <dialog id="wallDialog" class="wall-dialog"><div class="dialog-head"><div><p class="tag">PERSONALIZE YOUR SPACE</p><h2>استوديو الخلفيات</h2></div><button id="wallClose" class="close">✕</button></div>
@@ -35,8 +36,9 @@
 <label class="file-button">＋ إضافة فيديوهات أو صور<input id="wallFiles" type="file" accept="video/*,image/*" multiple></label>
 <label>تبديل الخلفية كل<select id="interval"><option value="1">دقيقة</option><option value="3" selected>3 دقائق</option><option value="5">5 دقائق</option><option value="10">10 دقائق</option><option value="15">15 دقيقة</option><option value="30">30 دقيقة</option><option value="60">ساعة</option></select></label>
 <label>طريقة العرض<select id="fit"><option value="cover">ملء الشاشة</option><option value="contain">إظهار الصورة كاملة</option></select></label>
-<label>تعتيم الخلفية <input id="darkness" type="range" min="0" max="85" value="28"></label>
+<label>تعتيم الخلفية <input id="darkness" type="range" min="0" max="85" value="35"></label>
 <label>تمويه الخلفية <input id="blur" type="range" min="0" max="12" value="0"></label>
+<label class="toggle-line"><input id="studioAutoColor" type="checkbox" checked><span>تكييف ألوان النص حسب الفيديو</span></label>
 </div>
 <div class="wall-list-head"><b>قائمة خلفياتي</b><div><button id="shuffle">ترتيب عشوائي</button><button id="rotateNow">تبديل الآن</button></div></div>
 <div id="wallList" class="wall-list"><p class="empty">لم تضف خلفيات بعد. اختر فيديوهات أو صوراً من جهازك.</p></div>
