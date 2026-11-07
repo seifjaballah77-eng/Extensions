@@ -1,0 +1,1 @@
+{"manifest_version":3,"name":"Seif Privacy","version":"1.0.1","description":"اختصارات إعدادات الخصوصية وأذونات المواقع.","permissions":["tabs"],"action":{"default_title":"Seif Privacy","default_popup":"popup.html"}}
