@@ -36,3 +36,56 @@ $('#rotateNow').onclick=()=>showItem(current+1);
 $('#wallSave').onclick=()=>{saveSettings();startRotation();if(items.length)showItem(current);dialog.close()};
 document.addEventListener('visibilitychange',()=>{if(document.hidden)video.pause();else if(items.length&&isVideo(items[current]))video.play().catch(()=>{})});
 init();
+
+// Seif Hub extended workspace: themes, draggable cards, local tools and audio.
+const hubModes=['hacker','calm','cyber','luxury'];
+function setHubMode(mode){
+ if(!hubModes.includes(mode))mode='hacker';
+ hubModes.forEach(m=>body.classList.toggle('mode-'+m,mode===m));
+ ['Hacker','Calm','Cyber','Luxury'].forEach((label,i)=>{const b=$('#mode'+label);if(b)b.classList.toggle('active',hubModes[i]===mode)});
+ localStorage.setItem('seif-hub-mode',mode);
+}
+$('#modeHacker').onclick=()=>setHubMode('hacker');
+$('#modeCalm').onclick=()=>setHubMode('calm');
+$('#modeCyber').onclick=()=>setHubMode('cyber');
+$('#modeLuxury').onclick=()=>setHubMode('luxury');
+// Replace the earlier two-mode initializer while preserving the stored selection.
+const previousInitMode=localStorage.getItem('seif-hub-mode')||'hacker';setHubMode(previousInitMode);
+// Local AI helper: transparent, deterministic assistance; no fake cloud-AI claims.
+const aiReplies=[
+ [/طقس|الجو/i,'افتح بطاقة الطقس واضغط تحديث. سيطلب المتصفح إذن الموقع ثم يجلب بيانات الطقس من خدمة Open-Meteo.'],
+ [/مهمة|مهام|تنظيم|وقت/i,'قسّم العمل إلى مهام صغيرة، واكتب أول خطوة قابلة للإنجاز في قائمة المهام. يمكنك تحديد المهمة عند إكمالها.'],
+ [/ملاحظة|ملاحظات/i,'اكتب في بطاقة ملاحظاتي؛ تُحفظ تلقائياً على هذا الجهاز داخل المتصفح.'],
+ [/موسيقى|صوت/i,'اختر ملفات صوتية من جهازك في مشغل الموسيقى. الملفات لا تُرفع إلى أي خادم.'],
+ [/خلفية|فيديو|ألوان/i,'من استوديو الخلفيات أضف صوراً أو فيديوهات واضبط التعتيم والتمويه والتبديل التلقائي.'],
+ [/اختصار|بحث|متصفح/i,'اكتب عبارة في مربع البحث واختر محرك البحث. ويمكنك سحب بطاقات مساحة العمل لتغيير ترتيبها.']
+];
+$('#aiForm').onsubmit=e=>{e.preventDefault();const q=$('#aiInput').value.trim();if(!q)return;const box=$('#aiMessages');const user=document.createElement('p');user.className='user-bubble';user.textContent=q;box.append(user);const found=aiReplies.find(x=>x[0].test(q));const answer=found?found[1]:'أستطيع مساعدتك في الطقس والمهام والملاحظات والموسيقى والخلفيات. اكتب سؤالك بصورة أكثر تحديداً. هذا الإصدار محلي ولا يدّعي الاتصال بنموذج سحابي.';const reply=document.createElement('p');reply.className='ai-bubble';reply.textContent=answer;box.append(reply);box.scrollTop=box.scrollHeight;$('#aiInput').value='';};
+// Tasks and notes stored locally.
+let tasks=JSON.parse(localStorage.getItem('seif-hub-tasks')||'[]');
+function renderTasks(){const list=$('#taskList');list.replaceChildren();tasks.forEach((t,i)=>{const li=document.createElement('li');const cb=document.createElement('input');cb.type='checkbox';cb.checked=t.done;cb.onchange=()=>{tasks[i].done=cb.checked;persistTasks();renderTasks()};const span=document.createElement('span');span.textContent=t.text;if(t.done)span.className='done';const del=document.createElement('button');del.textContent='×';del.title='حذف';del.onclick=()=>{tasks.splice(i,1);persistTasks();renderTasks()};li.append(cb,span,del);list.append(li)});$('#taskCount').textContent=tasks.length+' مهام';}
+function persistTasks(){localStorage.setItem('seif-hub-tasks',JSON.stringify(tasks))}
+$('#taskForm').onsubmit=e=>{e.preventDefault();const v=$('#taskInput').value.trim();if(!v)return;tasks.push({text:v,done:false});persistTasks();renderTasks();$('#taskInput').value=''};
+$('#notesInput').value=localStorage.getItem('seif-hub-notes')||'';
+$('#notesInput').addEventListener('input',()=>localStorage.setItem('seif-hub-notes',$('#notesInput').value));
+renderTasks();
+// Calendar uses the browser's native date picker and local date formatting.
+const today=new Date();$('#calendarDate').value=[today.getFullYear(),String(today.getMonth()+1).padStart(2,'0'),String(today.getDate()).padStart(2,'0')].join('-');
+$('#calendarMonth').textContent=today.toLocaleDateString('ar-TN',{month:'long',year:'numeric'});
+$('#calendarDay').textContent=today.toLocaleDateString('ar-TN',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+$('#calendarDate').onchange=()=>{if($('#calendarDate').value){const d=new Date($('#calendarDate').value+'T12:00:00');$('#calendarDay').textContent=d.toLocaleDateString('ar-TN',{weekday:'long',day:'numeric',month:'long',year:'numeric'})}};
+// Weather: geolocation + Open-Meteo public endpoint, no API key.
+$('#weatherRefresh').onclick=()=>{const out=$('#weatherInfo');if(!navigator.geolocation){out.textContent='تحديد الموقع غير مدعوم في هذا المتصفح.';return}out.textContent='جارٍ تحديد موقعك...';navigator.geolocation.getCurrentPosition(async p=>{try{const url='https://api.open-meteo.com/v1/forecast?latitude='+p.coords.latitude+'&longitude='+p.coords.longitude+'&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m&timezone=auto';const r=await fetch(url);if(!r.ok)throw Error('weather');const d=await r.json(),c=d.current;const codes={0:'سماء صافية',1:'غالباً صافٍ',2:'غائم جزئياً',3:'غائم',45:'ضباب',48:'ضباب متجمد',51:'رذاذ خفيف',61:'مطر خفيف',63:'مطر',65:'مطر غزير',71:'ثلوج',80:'زخات مطر',95:'عواصف رعدية'};out.textContent='🌡 '+Math.round(c.temperature_2m)+'°C · '+(codes[c.weather_code]||'حالة جوية متغيرة')+' · رطوبة '+c.relative_humidity_2m+'% · رياح '+c.wind_speed_10m+' كم/س';}catch(e){out.textContent='تعذر جلب الطقس. تحقق من الاتصال وحاول مجدداً.'}},()=>{out.textContent='لم يُسمح بالوصول إلى الموقع. يمكنك تفعيل إذن الموقع من إعدادات المتصفح.'},{timeout:10000,maximumAge:600000})};
+// Local music playlist.
+let tracks=[],trackIndex=0,musicUrl=null;
+function playTrack(i){if(!tracks.length)return;trackIndex=(i+tracks.length)%tracks.length;if(musicUrl)URL.revokeObjectURL(musicUrl);musicUrl=URL.createObjectURL(tracks[trackIndex]);$('#musicPlayer').src=musicUrl;$('#musicName').textContent=tracks[trackIndex].name;$('#musicPlayer').play().catch(()=>{});}
+$('#musicFiles').onchange=e=>{tracks.push(...Array.from(e.target.files).filter(f=>f.type.startsWith('audio/')));if(tracks.length)playTrack(tracks.length-1);e.target.value=''};
+$('#musicPrev').onclick=()=>playTrack(trackIndex-1);$('#musicNext').onclick=()=>playTrack(trackIndex+1);$('#musicPlayer').onended=()=>playTrack(trackIndex+1);
+// Drag/drop ordering for tool tiles and workspace cards.
+function enableDrag(container,selector,key){const root=$(container);if(!root)return;let dragged=null;const saved=JSON.parse(localStorage.getItem(key)||'[]');saved.forEach(id=>{const el=Array.from(root.querySelectorAll(selector)).find(x=>x.dataset.dragId===id);if(el)root.append(el)});root.querySelectorAll(selector).forEach((el,i)=>{if(!el.dataset.dragId)el.dataset.dragId=el.id||('item-'+i);el.draggable=true;el.addEventListener('dragstart',()=>{dragged=el;el.classList.add('dragging')});el.addEventListener('dragend',()=>{el.classList.remove('dragging');dragged=null;localStorage.setItem(key,JSON.stringify(Array.from(root.querySelectorAll(selector)).map(x=>x.dataset.dragId)))});el.addEventListener('dragover',e=>{e.preventDefault();if(!dragged||dragged===el)return;const r=el.getBoundingClientRect();const after=(e.clientY-r.top)>r.height/2;root.insertBefore(dragged,after?el.nextSibling:el)})})}
+enableDrag('#toolGrid','.tool','seif-hub-tool-order');enableDrag('#suiteGrid','.suite-card','seif-hub-card-order');
+$('#suiteToggle').onclick=()=>{const grid=$('#suiteGrid');grid.hidden=!grid.hidden;$('#suiteToggle').textContent=grid.hidden?'إظهار الأدوات':'إخفاء الأدوات'};
+// Gentle pointer parallax + video luminance response, without affecting text contrast.
+let pointerX=0,pointerY=0;document.addEventListener('pointermove',e=>{pointerX=(e.clientX/innerWidth-.5)*2;pointerY=(e.clientY/innerHeight-.5)*2;body.style.setProperty('--pointer-x',pointerX.toFixed(2));body.style.setProperty('--pointer-y',pointerY.toFixed(2))},{passive:true});
+const oldAnalyzeFrame=analyzeFrame;
+analyzeFrame=function(){oldAnalyzeFrame();if(video.readyState>=2){try{const c=document.createElement('canvas');c.width=12;c.height=8;const x=c.getContext('2d',{willReadFrequently:true});x.drawImage(video,0,0,12,8);const a=x.getImageData(0,0,12,8).data;let lum=0,n=0;for(let i=0;i<a.length;i+=16){const l=.2126*a[i]+.7152*a[i+1]+.0722*a[i+2];if(l>28){lum+=l;n++}}if(n)body.style.setProperty('--video-energy',String(Math.min(1,lum/n/190)))}catch(e){}}};
