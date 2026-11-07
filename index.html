@@ -2,71 +2,50 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#100b19">
-<title>Seif Extensions — أدواتك</title>
+<meta name="theme-color" content="#08070b"><title>Seif Extensions | إضافات سيف</title>
 <style>
-:root{--bg:#0b0811;--panel:#171120;--panel2:#21172d;--text:#fff9ef;--muted:#c6b9d1;--gold:#e8c16d;--purple:#bd69ff;--line:#54356d;--soft:#30213f}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 85% 0,rgba(160,75,220,.24),transparent 38%),radial-gradient(ellipse at 8% 95%,rgba(222,177,85,.11),transparent 35%),var(--bg);color:var(--text);font:16px/1.6 Arial,sans-serif;min-height:100vh}
-body.light{--bg:#faf7ff;--panel:#fff;--panel2:#f2eafb;--text:#271932;--muted:#6d6077;--line:#d9c4eb;--soft:#eee2f8;background:radial-gradient(ellipse at 85% 0,rgba(190,120,255,.17),transparent 38%),radial-gradient(ellipse at 8% 95%,rgba(222,177,85,.14),transparent 35%),var(--bg)}
-main{width:min(1080px,calc(100% - 32px));margin:auto;padding:28px 0 50px}
-.top{display:flex;align-items:center;justify-content:space-between;gap:12px}.brand{font-weight:800;letter-spacing:2px;color:var(--gold)}.theme{border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:12px;padding:9px 13px;cursor:pointer}
-.hero{text-align:center;padding:46px 15px 35px}.hero .mark{color:var(--purple);letter-spacing:5px;font-size:13px;font-weight:bold}.hero h1{font-size:clamp(38px,7vw,64px);line-height:1.1;margin:12px 0;color:var(--gold);text-shadow:0 0 24px #9c6a2d55}.hero p{color:var(--muted);margin:12px auto;max-width:650px}
-.search{display:block;width:min(560px,100%);margin:22px auto 0;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 16px;color:var(--text);font-size:15px;outline:none}.search:focus{border-color:var(--purple);box-shadow:0 0 0 3px #bd69ff22}
-.group{margin:26px 0 34px}.group-head{display:flex;align-items:center;gap:12px;margin-bottom:13px}.group-head h2{font-size:20px;color:var(--gold);margin:0}.group-head:after{content:"";height:1px;background:var(--line);flex:1}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.app{display:flex;align-items:center;gap:15px;padding:17px;background:linear-gradient(145deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:18px;min-height:116px;transition:.18s}.app:hover{transform:translateY(-3px);border-color:var(--purple);box-shadow:0 12px 28px #0003}.logo{width:64px;height:64px;flex:0 0 64px;border-radius:17px;display:grid;place-items:center;background:linear-gradient(145deg,#271638,#15101d);border:1px solid #9b5bc2;box-shadow:inset 0 0 18px #a44de433}.logo svg{width:39px;height:39px;stroke:var(--gold);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.app h3{margin:0;color:var(--text);font-size:18px}.app p{margin:3px 0 8px;color:var(--muted);font-size:13px}.status{font-size:11px;color:var(--gold);border:1px solid #a77a37;border-radius:20px;padding:3px 8px;display:inline-block}
-.entertain{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.idea{padding:18px;border:1px solid var(--line);background:var(--panel);border-radius:17px}.idea h3{margin:0;color:var(--purple);font-size:17px}.idea p{margin:5px 0 0;color:var(--muted);font-size:13px}.note{border:1px dashed var(--line);padding:14px;border-radius:14px;color:var(--muted);font-size:13px;margin-top:22px}
-footer{text-align:center;color:var(--gold);font-size:13px;margin-top:40px}
-@media(max-width:620px){.grid,.entertain{grid-template-columns:1fr}.app{min-height:102px}.hero{padding-top:35px}.top{align-items:flex-start}}
-</style>
-</head>
-<body>
-<main>
-<div class="top"><div class="brand">✦ SEIF LAB</div><button class="theme" id="theme">الوضع الليلي / النهاري</button></div>
-<header class="hero"><div class="mark">NEON PURPLE × GOLD</div><h1>Seif Extensions</h1><p>إضافات صغيرة وممتعة تجعل التصفح أسهل. كل أداة مستقلة، ولها شعارها وتنزيلها الخاص.</p><input class="search" id="search" type="search" placeholder="ابحث عن إضافة..." aria-label="ابحث عن إضافة"></header>
+:root{--bg:#08070b;--panel:#151219;--panel2:#211a26;--text:#fff;--muted:#c9c2ce;--gold:#e7bd62;--gold2:#9e762c;--purple:#c36cff;--line:#6c4a83}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 85% 0,#8d3dbb2b,transparent 38%),radial-gradient(ellipse at 5% 90%,#d5a94b16,transparent 35%),var(--bg);color:var(--text);font:16px/1.65 Arial,sans-serif}
+body.light{--bg:#fff;--panel:#fff;--panel2:#f7f2fa;--text:#17131b;--muted:#62596a;--line:#d8c6e2;background:radial-gradient(ellipse at 85% 0,#bd65ff1d,transparent 38%),radial-gradient(ellipse at 5% 90%,#e7bd6222,transparent 35%),var(--bg)}
+main{width:min(1100px,calc(100% - 32px));margin:auto;padding:24px 0 48px}.top{display:flex;justify-content:space-between;align-items:center}.brand{color:var(--gold);font-weight:900;letter-spacing:2px}.theme{background:var(--panel);color:var(--gold);border:1px solid var(--gold2);border-radius:12px;padding:10px 14px;cursor:pointer}
+.hero{text-align:center;padding:45px 12px 30px}.hero small{color:var(--purple);letter-spacing:4px;font-weight:bold}.hero h1{font-size:clamp(38px,7vw,65px);line-height:1.1;margin:12px 0;color:var(--gold);text-shadow:0 0 25px #e7bd6244}.hero p{color:var(--muted);max-width:660px;margin:12px auto}.search{width:min(570px,100%);padding:14px 16px;border-radius:14px;border:1px solid var(--line);background:var(--panel);color:var(--text);font-size:15px;margin-top:16px;outline:none}.search:focus{border-color:var(--purple);box-shadow:0 0 0 3px #c36cff22}
+.group{margin:28px 0 36px}.group-head{display:flex;align-items:center;gap:13px;margin-bottom:14px}.group-head h2{font-size:21px;color:var(--gold);margin:0}.group-head:after{content:"";height:1px;background:linear-gradient(90deg,var(--line),transparent);flex:1}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.app{display:flex;align-items:center;gap:14px;padding:17px;background:linear-gradient(145deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:17px;min-height:142px;transition:.2s}.app:hover{transform:translateY(-3px);border-color:var(--purple);box-shadow:0 12px 28px #0004}.logo{width:58px;height:58px;flex:0 0 58px;display:grid;place-items:center;border-radius:16px;background:#21152b;border:1px solid var(--gold2);color:var(--gold);font-size:19px;font-weight:900;box-shadow:0 0 17px #c36cff20}.app h3{margin:0;color:var(--gold);font-size:18px}.app p{margin:3px 0 8px;color:var(--muted);font-size:13px}.status{display:inline-block;font-size:11px;color:var(--purple);border:1px solid var(--purple);border-radius:20px;padding:2px 8px;margin-left:5px}.install{display:inline-block;color:#fff;background:linear-gradient(120deg,#80502a,#b58b3e);border:1px solid var(--gold);border-radius:8px;padding:5px 9px;font-size:11px;text-decoration:none;margin-top:5px}.install:hover{box-shadow:0 0 13px #c36cff55}
+.note{border:1px dashed var(--line);padding:14px;border-radius:13px;color:var(--muted);font-size:13px;margin-top:20px}.ideas{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.idea{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:15px}.idea h3{color:var(--purple);margin:0}.idea p{font-size:13px;color:var(--muted);margin:4px 0 0}footer{text-align:center;color:var(--gold);font-size:13px;margin-top:40px}
+@media(max-width:650px){.grid,.ideas{grid-template-columns:1fr}.app{min-height:125px}.hero{padding-top:34px}}
+</style></head>
+<body><main>
+<div class="top"><div class="brand">✦ SEIF LAB</div><button class="theme" id="theme">تبديل الوضع</button></div>
+<header class="hero"><small>GOLD × NEON PURPLE</small><h1>Seif Extensions</h1><p>إضافات مستقلة، كل واحدة لها وظيفتها وشعارها وملف تثبيتها. هوية ذهبية مع الأسود أو الأبيض والنيون البنفسجي.</p><input class="search" id="search" type="search" placeholder="ابحث عن إضافة..." aria-label="ابحث عن إضافة"></header>
 
-<section class="group" data-group>
-<div class="group-head"><h2>🖼️ الصور واللقطات</h2></div>
-<div class="grid">
-<article class="app" data-name="Seif Capture تصوير الشاشة لقطات OCR"><div class="logo"><svg viewBox="0 0 48 48"><path d="M8 17V9h8M32 9h8v8M40 31v8h-8M16 39H8v-8"/><rect x="14" y="15" width="20" height="18" rx="3"/><circle cx="24" cy="24" r="5"/><path d="M18 15l2-3h8l2 3"/></svg></div><div><h3>Seif Capture</h3><p>تصوير الشاشة والصفحة واستخراج النصوص من الصور.</p><span class="status">قيد الإعداد</span></div></article>
-<article class="app" data-name="Seif Image تنزيل الصور روابط JPG PNG GIF WebP"><div class="logo"><svg viewBox="0 0 48 48"><rect x="8" y="9" width="32" height="29" rx="4"/><circle cx="19" cy="19" r="3"/><path d="M10 33l10-9 7 6 5-5 6 7M24 3v17m-6-6l6 6 6-6"/></svg></div><div><h3>Seif Image</h3><p>تنزيل الصور من الصفحات أو مباشرة من رابط الصورة.</p><span class="status">قيد الإعداد</span></div></article>
+<section class="group" data-group><div class="group-head"><h2>الصور واللقطات</h2></div><div class="grid">
+<article class="app" data-name="Seif Capture تصوير الشاشة"><div class="logo">SC</div><div><h3>Seif Capture</h3><p>التقاط صورة للجزء الظاهر من الصفحة وحفظها PNG.</p><span class="status">نسخة أولية</span><br><a class="install" href="https://github.com/seifjaballah77-eng/Extensions/tree/main/seif-capture">ملفات الإضافة</a></div></article>
+<article class="app" data-name="Seif Image تنزيل الصور"><div class="logo">SI</div><div><h3>Seif Image</h3><p>اكتشاف صور الصفحة وتنزيلها أو تنزيل صورة من رابط مباشر.</p><span class="status">نسخة أولية</span><br><a class="install" href="https://github.com/seifjaballah77-eng/Extensions/tree/main/seif-image">ملفات الإضافة</a></div></article>
 </div></section>
 
-<section class="group" data-group>
-<div class="group-head"><h2>🌐 اللغة والمعاني</h2></div>
-<div class="grid">
-<article class="app" data-name="Seif Translate ترجمة تلقائية يدوية كل اللغات"><div class="logo"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="17"/><path d="M7 24h34M24 7c5 5 7 11 7 17s-2 12-7 17c-5-5-7-11-7-17s2-12 7-17z"/><path d="M15 14h18"/></svg></div><div><h3>Seif Translate</h3><p>اكتشاف اللغة والترجمة التلقائية أو بزر يدوي.</p><span class="status">قيد الإعداد</span></div></article>
-<article class="app" data-name="Seif Dictionary قاموس معاني كلمات"><div class="logo"><svg viewBox="0 0 48 48"><path d="M9 10h19a5 5 0 0 1 5 5v23H14a5 5 0 0 1-5-5z"/><path d="M33 15h6v23h-6M16 19h11M16 25h11M16 31h8"/></svg></div><div><h3>Seif Dictionary</h3><p>قاموس فوري لمعاني الكلمات ونطقها.</p><span class="status">فكرة مقترحة</span></div></article>
+<section class="group" data-group><div class="group-head"><h2>اللغة والمعاني</h2></div><div class="grid">
+<article class="app" data-name="Seif Translate ترجمة"><div class="logo">ST</div><div><h3>Seif Translate</h3><p>ترجمة النصوص والصفحات عبر خدمة ترجمة خارجية.</p><span class="status">نسخة أولية</span><br><a class="install" href="https://github.com/seifjaballah77-eng/Extensions/tree/main/seif-translate">ملفات الإضافة</a></div></article>
+<article class="app" data-name="Seif Dictionary قاموس"><div class="logo">SD</div><div><h3>Seif Dictionary</h3><p>قاموس فوري ومعاني الكلمات — ضمن الأفكار القادمة.</p><span class="status">مقترحة</span></div></article>
 </div></section>
 
-<section class="group" data-group>
-<div class="group-head"><h2>☀️ أدوات الحياة اليومية</h2></div>
-<div class="grid">
-<article class="app" data-name="Seif Weather الطقس الحرارة المطر"><div class="logo"><svg viewBox="0 0 48 48"><circle cx="18" cy="18" r="7"/><path d="M18 5v4m0 18v4M5 18h4m18 0h4M9 9l3 3m12 12l3 3M9 27l3-3"/><path d="M18 34a9 9 0 0 1 17-4 6 6 0 0 1 0 12H18a4 4 0 0 1 0-8z"/></svg></div><div><h3>Seif Weather</h3><p>الطقس الحالي وتوقعات الأيام القادمة.</p><span class="status">قيد الإعداد</span></div></article>
-<article class="app" data-name="Seif Calculator حاسبة علمية خصومات"><div class="logo"><svg viewBox="0 0 48 48"><rect x="11" y="6" width="26" height="36" rx="4"/><rect x="16" y="11" width="16" height="7" rx="1"/><path d="M17 25h3m7 0h3M17 32h3m7 0h3M17 38h3m7 0h3"/></svg></div><div><h3>Seif Calculator</h3><p>الحاسبة العادية والعلمية وحساب الخصومات.</p><span class="status">قيد الإعداد</span></div></article>
+<section class="group" data-group><div class="group-head"><h2>أدوات الحياة اليومية</h2></div><div class="grid">
+<article class="app" data-name="Seif Weather الطقس"><div class="logo">SW</div><div><h3>Seif Weather</h3><p>الطقس الحالي، سجل الأيام السبعة الماضية، وتوقعات الأيام السبعة القادمة.</p><span class="status">نسخة أولية</span><br><a class="install" href="https://github.com/seifjaballah77-eng/Extensions/tree/main/seif-weather">ملفات الإضافة</a></div></article>
+<article class="app" data-name="Seif Calculator حاسبة"><div class="logo">SC+</div><div><h3>Seif Calculator</h3><p>عمليات حسابية، خصومات، وتقسيم الفاتورة.</p><span class="status">نسخة أولية</span><br><a class="install" href="https://github.com/seifjaballah77-eng/Extensions/tree/main/seif-calculator">ملفات الإضافة</a></div></article>
 </div></section>
 
-<section class="group" data-group>
-<div class="group-head"><h2>🔖 الحفظ والمفضلة</h2></div>
-<div class="grid">
-<article class="app" data-name="Seif Bookmarks حفظ الروابط المفضلة مزامنة الهاتف الكمبيوتر"><div class="logo"><svg viewBox="0 0 48 48"><path d="M14 8h20a3 3 0 0 1 3 3v29l-13-8-13 8V11a3 3 0 0 1 3-3z"/><path d="M18 16h12"/></svg></div><div><h3>Seif Bookmarks</h3><p>احفظ روابطك وافتحها لاحقاً، مع مزامنتها بين أجهزتك.</p><span class="status">قيد الإعداد</span></div></article>
+<section class="group" data-group><div class="group-head"><h2>الحفظ والمفضلة</h2></div><div class="grid">
+<article class="app" data-name="Seif Bookmarks حفظ الروابط"><div class="logo">SB</div><div><h3>Seif Bookmarks</h3><p>حفظ الروابط والبحث فيها وتنظيمها وتصدير نسخة احتياطية.</p><span class="status">نسخة أولية</span><br><a class="install" href="https://github.com/seifjaballah77-eng/Extensions/tree/main/seif-bookmarks">ملفات الإضافة</a></div></article>
 </div></section>
 
-<section class="group">
-<div class="group-head"><h2>🎮 أفكار ترفيهية للمستقبل</h2></div>
-<div class="entertain">
-<article class="idea"><h3>Seif Arcade</h3><p>مجموعة ألعاب خفيفة وسريعة داخل المتصفح، مثل الألغاز والسباقات وألعاب الذكاء.</p></article>
-<article class="idea"><h3>Seif Random</h3><p>اقترح لك شيئاً ممتعاً عندما تشعر بالملل: لعبة، تحدٍ، صورة مضحكة أو نشاط عشوائي.</p></article>
-<article class="idea"><h3>Seif Movie Night</h3><p>قائمة أفلام ومسلسلات تريد مشاهدتها، مع تصنيفات وتقييمات شخصية.</p></article>
-<article class="idea"><h3>Seif Fun</h3><p>اختبارات شخصية خفيفة، أسئلة ممتعة، ألغاز وتحديات للأصدقاء.</p></article>
-</div>
-<div class="note">هذه الصفحة تعرض خطة الإضافات وتصنيفها. أزرار التنزيل ستظهر لكل إضافة بعد بناء ملفاتها واختبارها؛ لا توجد تنزيلات جاهزة لهذه الإضافات حالياً.</div>
-</section>
-<footer>صنع بيد سيف · Seif Extensions</footer>
-</main>
+<section class="group"><div class="group-head"><h2>إضافات أخرى موجودة بالمستودع</h2></div><div class="grid">
+<article class="app" data-name="Seif AI مساعد"><div class="logo">AI</div><div><h3>Seif AI</h3><p>استخراج نص الصفحة المحدد أو عرض ملخص سريع من فقراتها.</p><span class="status">نسخة أولية</span><br><a class="install" href="https://github.com/seifjaballah77-eng/Extensions/tree/main/seif-ai">ملفات الإضافة</a></div></article>
+<article class="app" data-name="Seif Privacy الخصوصية"><div class="logo">SP</div><div><h3>Seif Privacy</h3><p>اختصارات لإعدادات الخصوصية وأذونات المواقع.</p><span class="status">نسخة أولية</span><br><a class="install" href="https://github.com/seifjaballah77-eng/Extensions/tree/main/seif-privacy">ملفات الإضافة</a></div></article>
+<article class="app" data-name="Seif Download التنزيلات"><div class="logo">DL</div><div><h3>Seif Download</h3><p>عرض التنزيلات الأخيرة وفتح مدير التنزيلات.</p><span class="status">نسخة أولية</span><br><a class="install" href="https://github.com/seifjaballah77-eng/Extensions/tree/main/seif-download">ملفات الإضافة</a></div></article>
+<article class="app" data-name="Seif New Tab صفحة بداية"><div class="logo">NT</div><div><h3>Seif New Tab</h3><p>صفحة بداية مخصصة مع البحث والاختصارات.</p><span class="status">نسخة أولية</span><br><a class="install" href="https://github.com/seifjaballah77-eng/Extensions/tree/main/seif-new-tab">ملفات الإضافة</a></div></article>
+</div><div class="note">كل إضافة تُثبت وحدها من مجلدها. ملفات ZIP المنفصلة ستُنشأ تلقائياً عبر GitHub Actions بعد نجاح تشغيل عملية البناء. هذه الإصدارات أولية ولم تُختبر بعد على Supermium أو Windows 7.</div></section>
+
+<section class="group"><div class="group-head"><h2>أفكار ترفيهية قادمة</h2></div><div class="ideas"><article class="idea"><h3>Seif Arcade</h3><p>ألعاب خفيفة داخل المتصفح.</p></article><article class="idea"><h3>Seif Random</h3><p>اقتراحات ممتعة عند الشعور بالملل.</p></article><article class="idea"><h3>Seif Movie Night</h3><p>قائمة شخصية للأفلام والمسلسلات.</p></article><article class="idea"><h3>Seif Fun</h3><p>ألغاز واختبارات وتحديات للأصدقاء.</p></article></div></section>
+<footer>صنع بيد سيف · Seif Extensions</footer></main>
 <script>
-const body=document.body,theme=document.getElementById('theme'),search=document.getElementById('search');
-if(localStorage.getItem('seif-home-theme')==='light')body.classList.add('light');
-theme.addEventListener('click',()=>{body.classList.toggle('light');localStorage.setItem('seif-home-theme',body.classList.contains('light')?'light':'dark')});
-search.addEventListener('input',()=>{const q=search.value.trim().toLowerCase();document.querySelectorAll('.app').forEach(card=>card.hidden=!card.dataset.name.toLowerCase().includes(q));document.querySelectorAll('[data-group]').forEach(group=>{group.hidden=!group.querySelector('.app:not([hidden])')})});
-</script>
-</body></html>
+const body=document.body,theme=document.querySelector('#theme'),search=document.querySelector('#search');if(localStorage.getItem('seif-home-theme')==='light')body.classList.add('light');theme.onclick=()=>{body.classList.toggle('light');localStorage.setItem('seif-home-theme',body.classList.contains('light')?'light':'dark')};search.oninput=()=>{const q=search.value.trim().toLowerCase();document.querySelectorAll('.app').forEach(c=>c.hidden=!c.dataset.name.toLowerCase().includes(q));document.querySelectorAll('[data-group]').forEach(g=>g.hidden=!g.querySelector('.app:not([hidden])'))};
+</script></body></html>
