@@ -46,3 +46,8 @@
 .light .suite-card{background:rgba(255,255,255,calc(var(--ui-alpha)*.9));color:#281b32}
 .light .ai-bubble{background:rgba(90,60,110,.14);color:#281b32}
 @media(max-width:650px){.transparency-control{width:100%;justify-content:center}}
+
+/* Slightly translucent glyphs plus stronger transparency control for panels. */
+body:not(.light) .dashboard h1,body:not(.light) .dashboard h2,body:not(.light) .dashboard p,body:not(.light) .dashboard small,body:not(.light) .dashboard b,body:not(.light) .dashboard label,body:not(.light) .dashboard footer{opacity:.93}
+.pomo-time{font-size:40px;text-align:center;font-weight:700;letter-spacing:3px;color:var(--adaptive-color);text-shadow:0 0 18px var(--adaptive-glow);padding:12px}
+.pomo-actions{display:flex;justify-content:center;gap:8px}
