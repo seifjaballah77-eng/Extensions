@@ -6,7 +6,7 @@
 </head>
 <body class="mode-hacker">
 <div class="wallpaper" aria-hidden="true"><video id="wallVideo" muted playsinline loop></video><div class="shade" id="shade"></div></div>
-<header class="topbar"><a class="brand" href="#">✦ SEIF HUB</a><div class="top-actions"><button id="modeHacker" class="mode-button active">⌁ Hacker</button><button id="modeCalm" class="mode-button">◌ هدوء</button><button id="wallpaperOpen" class="soft">استوديو الخلفيات</button><button id="theme">الوضع النهاري</button></div></header>
+<header class="topbar"><a class="brand" href="#">✦ SEIF HUB</a><div class="top-actions"><button id="modeHacker" class="mode-button active">⌁ Hacker</button><button id="modeCalm" class="mode-button">◌ هدوء</button><button id="modeCyber" class="mode-button">⌬ Cyberpunk</button><button id="modeLuxury" class="mode-button">◇ Luxury</button><button id="wallpaperOpen" class="soft">استوديو الخلفيات</button><button id="theme">الوضع النهاري</button></div></header>
 <main class="dashboard">
 <section class="hero"><p class="tag">YOUR PERSONAL BROWSER SPACE</p><div id="clock" class="clock">--:--</div><div id="dateLine" class="date-line"></div><h1 class="adaptive-text">مرحباً بك في Seif Hub</h1><p class="subtitle adaptive-text">مساحتك الذكية للعمل والتركيز والاستكشاف.</p>
 <form id="search"><input id="q" autocomplete="off" placeholder="ابحث في الويب أو اكتب عنوان موقع"><select id="searchEngine" aria-label="محرك البحث"><option value="google">Google</option><option value="bing">Bing</option><option value="duck">DuckDuckGo</option><option value="youtube">YouTube</option></select><button>بحث</button></form>
@@ -26,7 +26,18 @@
 <a class="tool" data-name="التنزيلات Seif Download" href="https://github.com/seifjaballah77-eng/Extensions/tree/main/seif-download"><span class="tool-icon">⇩</span><b>Seif Download</b><small>مدير التنزيلات</small></a>
 </div><p class="hint">الأدوات التي لم تُدمج وظائفها بعد تفتح ملفاتها ومعلوماتها في المستودع؛ سننقل وظائفها إلى Seif Hub على مراحل.</p>
 </section>
-<section class="quick-links"><a href="https://youtube.com">YouTube</a><a href="https://mail.google.com">Gmail</a><a href="https://github.com">GitHub</a><a href="chrome://downloads">التنزيلات</a><a href="https://web.whatsapp.com">WhatsApp Web</a></section>
+
+<section class="hub-suite" id="hubSuite">
+ <div class="suite-head"><div><p class="tag">SEIF HUB WORKSPACE</p><h2>مساحتك اليومية</h2></div><button id="suiteToggle" class="tiny-button">إخفاء الأدوات</button></div>
+ <div class="suite-grid" id="suiteGrid">
+  <article class="suite-card ai-card" id="aiCard"><div class="card-title"><b>✧ مساعد Seif AI</b><span>محلي سريع</span></div><p class="muted">اسأل عن اختصارات المتصفح أو نظّم يومك أو اطلب فكرة.</p><div id="aiMessages" class="ai-messages" aria-live="polite"><p class="ai-bubble">مرحباً! أنا مساعد Seif. كيف أساعدك اليوم؟</p></div><form id="aiForm" class="inline-form"><input id="aiInput" placeholder="اكتب سؤالك..." autocomplete="off"><button>إرسال</button></form><small class="muted">المساعد الحالي يعمل محلياً دون إرسال محادثاتك إلى خادم. الربط بنموذج ذكاء اصطناعي يحتاج مفتاح API.</small></article>
+  <article class="suite-card" id="weatherCard"><div class="card-title"><b>☼ الطقس</b><button id="weatherRefresh" class="tiny-button">تحديث</button></div><div id="weatherInfo" class="weather-info">اضغط تحديث للسماح بتحديد موقعك وعرض الطقس.</div></article>
+  <article class="suite-card" id="calendarCard"><div class="card-title"><b>▦ التقويم</b><span id="calendarMonth"></span></div><input id="calendarDate" type="date"><p id="calendarDay" class="muted">اختر يوماً لعرضه.</p></article>
+  <article class="suite-card" id="tasksCard"><div class="card-title"><b>✓ المهام</b><span id="taskCount">0 مهام</span></div><form id="taskForm" class="inline-form"><input id="taskInput" placeholder="مهمة جديدة..." maxlength="100"><button>＋</button></form><ul id="taskList" class="task-list"></ul></article>
+  <article class="suite-card" id="notesCard"><div class="card-title"><b>▤ ملاحظاتي</b><span class="muted">حفظ تلقائي</span></div><textarea id="notesInput" placeholder="اكتب أفكارك وملاحظاتك هنا..."></textarea></article>
+  <article class="suite-card music-card" id="musicCard"><div class="card-title"><b>♫ مشغل الموسيقى</b><span class="muted">ملفاتك المحلية</span></div><label class="file-button music-file">اختيار موسيقى<input id="musicFiles" type="file" accept="audio/*" multiple></label><div id="musicName" class="muted">لم يتم اختيار مقطع</div><audio id="musicPlayer" controls preload="metadata"></audio><div class="music-actions"><button id="musicPrev" class="tiny-button">السابق</button><button id="musicNext" class="tiny-button">التالي</button></div></article>
+ </div>
+</section>\n<section class="quick-links"><a href="https://youtube.com">YouTube</a><a href="https://mail.google.com">Gmail</a><a href="https://github.com">GitHub</a><a href="chrome://downloads">التنزيلات</a><a href="https://web.whatsapp.com">WhatsApp Web</a></section>
 <footer>صنع بيد سيف · Seif Hub</footer>
 </main>
 <dialog id="wallDialog" class="wall-dialog"><div class="dialog-head"><div><p class="tag">PERSONALIZE YOUR SPACE</p><h2>استوديو الخلفيات</h2></div><button id="wallClose" class="close">✕</button></div>
