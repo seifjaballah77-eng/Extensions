@@ -2,6 +2,8 @@ name: Build individual Seif extension ZIPs
 on:
   push:
     branches: [main]
+    paths-ignore:
+      - 'downloads/**'
   workflow_dispatch:
 permissions:
   contents: write
@@ -37,6 +39,18 @@ jobs:
               archive="$folder"; [ "$folder" = "seif-new-tab" ] && archive="seif-hub"; zip -qr "dist/$archive.zip" "$folder"
             fi
           done
+      - name: Publish ZIPs for direct Seif Hub downloads
+        shell: bash
+        run: |
+          mkdir -p downloads
+          cp dist/*.zip downloads/
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add downloads/*.zip
+          if ! git diff --cached --quiet; then
+            git commit -m "Publish extension ZIP downloads for Seif Hub"
+            git push
+          fi
       - name: Publish separate ZIP downloads
         uses: softprops/action-gh-release@v2
         with:
