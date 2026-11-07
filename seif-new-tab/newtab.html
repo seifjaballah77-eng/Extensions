@@ -6,27 +6,40 @@
 </head>
 <body class="mode-hacker">
 <div class="wallpaper" aria-hidden="true"><video id="wallVideo" muted playsinline loop></video><div class="shade" id="shade"></div></div>
-<header class="topbar"><a class="brand" href="#">✦ SEIF HUB</a><div class="top-actions"><button id="modeHacker" class="mode-button active">⌁ Hacker</button><button id="modeCalm" class="mode-button">◌ هدوء</button><button id="modeCyber" class="mode-button">⌬ Cyberpunk</button><button id="modeLuxury" class="mode-button">◇ Luxury</button><button id="wallpaperOpen" class="soft">استوديو الخلفيات</button><button id="soundToggle" class="soft" aria-pressed="true">الصوت: تشغيل</button><button id="theme">الوضع النهاري</button></div></header>
+<header class="topbar"><a class="brand" href="#">✦ SEIF HUB</a><div class="top-actions"><button id="modeHacker" class="mode-button active">⌁ Hacker</button><button id="modeCalm" class="mode-button">◌ هدوء</button><button id="modeCyber" class="mode-button">⌬ Cyberpunk</button><button id="modeLuxury" class="mode-button">◇ Luxury</button><button id="wallpaperOpen" class="soft">استوديو الخلفيات</button><button id="sideToggle" class="soft" aria-label="فتح القائمة">☰ القائمة</button><button id="soundToggle" class="soft" aria-pressed="true">الصوت: تشغيل</button><button id="theme">الوضع النهاري</button></div></header>
 <main class="dashboard">
-<section class="hero"><p class="tag">YOUR PERSONAL BROWSER SPACE</p><div id="clock" class="clock">--:--</div><div id="dateLine" class="date-line"></div><h1 class="adaptive-text">مرحباً بك في Seif Hub</h1><p class="subtitle adaptive-text">مساحتك الذكية للعمل والتركيز والاستكشاف.</p>
+<section class="hero"><p class="tag">YOUR PERSONAL BROWSER SPACE</p><div id="clock" class="clock">--:--</div><div id="dateLine" class="date-line"></div><div class="weather-pinned-slot" id="weatherPinnedSlot"></div><h1 class="adaptive-text">مرحباً بك في Seif Hub</h1><p class="subtitle adaptive-text">مساحتك الذكية للعمل والتركيز والاستكشاف.</p>
 <form id="search"><input id="q" autocomplete="off" placeholder="ابحث في الويب أو اكتب عنوان موقع"><select id="searchEngine" aria-label="محرك البحث"><option value="google">Google</option><option value="bing">Bing</option><option value="duck">DuckDuckGo</option><option value="youtube">YouTube</option></select><button>بحث</button></form>
 <div class="personal-controls"><label class="toggle-line"><input id="autoColor" type="checkbox" checked><span>ألوان كتابة تتكيف مع الفيديو</span></label><span id="colorStatus" class="color-status">تحليل الألوان تلقائي</span><label class="transparency-control">شفافية الواجهة <input id="uiTransparency" type="range" min="15" max="95" value="72"></label><button id="focusToggle" class="tiny-button">وضع التركيز</button></div>
 </section>
-<section class="tools" id="toolsPanel"><div class="section-title"><h2>أدواتك</h2><input id="toolSearch" class="mini-search" placeholder="ابحث عن أداة"></div>
-<div class="tool-grid" id="toolGrid">
-<a class="tool" data-name="مراقبة المواقع Seif Watch" href="https://github.com/seifjaballah77-eng/Extensions/tree/main/seif-watch"><span class="tool-icon">◉</span><b>Seif Watch</b><small>مراقبة تغيّرات المواقع</small></a>
-<a class="tool" data-name="الترجمة Seif Translate" href="https://github.com/seifjaballah77-eng/Extensions/tree/main/seif-translate"><span class="tool-icon">文</span><b>Seif Translate</b><small>ترجمة GPT داخل الصفحة</small></a>
-<a class="tool" data-name="التقاط الشاشة Seif Capture" href="https://github.com/seifjaballah77-eng/Extensions/tree/main/seif-capture"><span class="tool-icon">▣</span><b>Seif Capture</b><small>لقطات الشاشة</small></a>
-<a class="tool" data-name="الصور Seif Image" href="https://github.com/seifjaballah77-eng/Extensions/tree/main/seif-image"><span class="tool-icon">▧</span><b>Seif Image</b><small>اكتشاف وتنزيل الصور</small></a>
-<a class="tool" data-name="الطقس Seif Weather" href="https://github.com/seifjaballah77-eng/Extensions/tree/main/seif-weather"><span class="tool-icon">☼</span><b>Seif Weather</b><small>الطقس والتوقعات</small></a>
-<a class="tool" data-name="الحاسبة Seif Calculator" href="https://github.com/seifjaballah77-eng/Extensions/tree/main/seif-calculator"><span class="tool-icon">＋</span><b>Seif Calculator</b><small>الحساب والخصومات</small></a>
-<a class="tool" data-name="المفضلة Seif Bookmarks" href="https://github.com/seifjaballah77-eng/Extensions/tree/main/seif-bookmarks"><span class="tool-icon">☆</span><b>Seif Bookmarks</b><small>حفظ الروابط وتنظيمها</small></a>
-<a class="tool" data-name="الذكاء الاصطناعي Seif AI" href="https://github.com/seifjaballah77-eng/Extensions/tree/main/seif-ai"><span class="tool-icon">✧</span><b>Seif AI</b><small>مساعد الصفحة</small></a>
-<a class="tool" data-name="الخصوصية Seif Privacy" href="https://github.com/seifjaballah77-eng/Extensions/tree/main/seif-privacy"><span class="tool-icon">⬡</span><b>Seif Privacy</b><small>أدوات الخصوصية</small></a>
-<a class="tool" data-name="التنزيلات Seif Download" href="https://github.com/seifjaballah77-eng/Extensions/tree/main/seif-download"><span class="tool-icon">⇩</span><b>Seif Download</b><small>مدير التنزيلات</small></a>
-</div><p class="hint">الأدوات التي لم تُدمج وظائفها بعد تفتح ملفاتها ومعلوماتها في المستودع؛ سننقل وظائفها إلى Seif Hub على مراحل.</p>
-</section>
-
+<aside class="tools side-tools" id="toolsPanel">
+ <div class="side-heading"><b>✦ قائمة Seif Hub</b><input id="toolSearch" class="mini-search" placeholder="ابحث عن أداة"></div>
+ <nav class="tool-grid side-grid" id="toolGrid" aria-label="قائمة الأدوات">
+  <a class="tool" data-name="مساعد Seif AI الذكاء الاصطناعي" data-open-card="aiCard" href="#toolStage"><span class="tool-icon">✧</span><b>Seif AI</b><small>المساعد الذكي المحلي</small></a>
+  <a class="tool" data-name="التقويم Calendar" data-open-card="calendarCard" href="#toolStage"><span class="tool-icon">▦</span><b>التقويم</b><small>التاريخ واختيار الأيام</small></a>
+  <a class="tool" data-name="المهام Tasks" data-open-card="tasksCard" href="#toolStage"><span class="tool-icon">✓</span><b>المهام</b><small>قائمة إنجازاتك</small></a>
+  <a class="tool" data-name="الملاحظات Notes" data-open-card="notesCard" href="#toolStage"><span class="tool-icon">▤</span><b>ملاحظاتي</b><small>حفظ تلقائي محلي</small></a>
+  <a class="tool" data-name="الموسيقى Music" data-open-card="musicCard" href="#toolStage"><span class="tool-icon">♫</span><b>الموسيقى</b><small>ملفاتك الصوتية</small></a>
+  <a class="tool" data-name="مؤقت التركيز Pomodoro" data-open-card="pomodoroCard" href="#toolStage"><span class="tool-icon">◷</span><b>مؤقت التركيز</b><small>جلسات Pomodoro</small></a>
+  <a class="tool" data-name="استوديو الخلفيات خلفية فيديو صور" data-open-wallpapers href="#toolStage"><span class="tool-icon">▧</span><b>استوديو الخلفيات</b><small>صور وفيديو وتبديل تلقائي</small></a>
+  <a class="tool" data-name="Seif Watch مراقبة المواقع" data-extension="Seif Watch" href="#toolStage"><span class="tool-icon">◉</span><b>Seif Watch</b><small>مراقبة تغيّرات المواقع</small></a>
+  <a class="tool" data-name="Seif Translate الترجمة" data-extension="Seif Translate" href="#toolStage"><span class="tool-icon">文</span><b>Seif Translate</b><small>الترجمة داخل الصفحة</small></a>
+  <a class="tool" data-name="Seif Capture التقاط الشاشة" data-extension="Seif Capture" href="#toolStage"><span class="tool-icon">▣</span><b>Seif Capture</b><small>لقطات الشاشة</small></a>
+  <a class="tool" data-name="Seif Image الصور" data-extension="Seif Image" href="#toolStage"><span class="tool-icon">▧</span><b>Seif Image</b><small>اكتشاف وتنزيل الصور</small></a>
+  <a class="tool" data-name="Seif Calculator الحاسبة" data-extension="Seif Calculator" href="#toolStage"><span class="tool-icon">＋</span><b>Seif Calculator</b><small>الحساب والخصومات</small></a>
+  <a class="tool" data-name="Seif Bookmarks المفضلة" data-extension="Seif Bookmarks" href="#toolStage"><span class="tool-icon">☆</span><b>Seif Bookmarks</b><small>حفظ الروابط</small></a>
+  <a class="tool" data-name="Seif Privacy الخصوصية" data-extension="Seif Privacy" href="#toolStage"><span class="tool-icon">⬡</span><b>Seif Privacy</b><small>أدوات الخصوصية</small></a>
+  <a class="tool" data-name="Seif Download التنزيلات" data-extension="Seif Download" href="#toolStage"><span class="tool-icon">⇩</span><b>Seif Download</b><small>إدارة التنزيلات</small></a>
+  <a class="tool" data-name="Seif QR قارئ منشئ رمز QR" data-idea="Seif QR" href="#toolStage"><span class="tool-icon">▦</span><b>Seif QR</b><small>إنشاء وقراءة QR · فكرة جديدة</small></a>
+  <a class="tool" data-name="Seif Convert تحويل الوحدات الملفات" data-idea="Seif Convert" href="#toolStage"><span class="tool-icon">⇄</span><b>Seif Convert</b><small>محول صيغ ووحدات · فكرة جديدة</small></a>
+  <a class="tool" data-name="Seif Password كلمات المرور" data-idea="Seif Password" href="#toolStage"><span class="tool-icon">⚿</span><b>Seif Password</b><small>مولد كلمات مرور محلي</small></a>
+  <a class="tool" data-name="Seif Color Studio الألوان" data-idea="Seif Color Studio" href="#toolStage"><span class="tool-icon">◈</span><b>Color Studio</b><small>منتقي ألوان الصور</small></a>
+  <a class="tool" data-name="Seif Arcade ألعاب" data-idea="Seif Arcade" href="#toolStage"><span class="tool-icon">▣</span><b>Seif Arcade</b><small>ألعاب خفيفة</small></a>
+ </nav>
+ <p class="side-hint">الوقت والطقس ظاهران دائماً في الصفحة الرئيسية.</p>
+</aside>
+<section class="tool-stage" id="toolStage" aria-live="polite"><div class="stage-welcome"><span class="tag">SEIF HUB WORKSPACE</span><h2>اختر أداة من القائمة الجانبية</h2><p>ستظهر الأداة هنا دون مغادرة تبويب Seif Hub.</p></div></section>
+<section class="weather-pinned" id="weatherPinned"></section>
 <section class="hub-suite" id="hubSuite">
  <div class="suite-head"><div><p class="tag">SEIF HUB WORKSPACE</p><h2>مساحتك اليومية</h2></div><button id="suiteToggle" class="tiny-button">إخفاء الأدوات</button></div>
  <div class="suite-grid" id="suiteGrid">
