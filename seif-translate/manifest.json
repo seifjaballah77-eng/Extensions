@@ -1,11 +1,19 @@
 {
   "manifest_version": 3,
   "name": "Seif Translate",
-  "version": "1.0.0",
-  "description": "ترجمة النصوص والصفحات عند الطلب.",
+  "version": "2.0.0",
+  "description": "ترجمة ذكية للنصوص وصفحات الويب داخل الصفحة نفسها.",
   "permissions": [
-    "activeTab"
+    "activeTab",
+    "scripting",
+    "storage"
   ],
+  "host_permissions": [
+    "https://api.openai.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
   "action": {
     "default_title": "Seif Translate",
     "default_popup": "popup.html"
